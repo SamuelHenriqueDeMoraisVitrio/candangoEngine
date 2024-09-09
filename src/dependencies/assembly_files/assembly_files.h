@@ -1,25 +1,23 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <sys/stat.h>
+#ifndef PRIVATE_ASSEMBLY_FILES__H
+#define PRIVATE_ASSEMBLY_FILES__H
 
-#define DTW_FILE_TYPE 1
-#define DTW_FOLDER_TYPE 2
-#define DTW_ALL_TYPE 3
-#define DTW_NOT_FOUND -1
+#include "../../imports.h"
 
-unsigned char *dtw_load_any_content(const char * path,long *size,bool *is_binary);
+#define PRIVATE_FILE_TYPE 1
+#define PRIVATE_FOLDER_TYPE 2
+#define PRIVATE_NOT_FOUND -1
 
-char *dtw_load_string_file_content(const char * path);
+unsigned char *private_get_any_content(const char * path,long *size,bool *is_binary);
 
-int dtw_entity_type(const char *path);
+char *private_get_string_in_file_content(const char * path);
 
-char *dtw_load_string_file_content(const char * path){
+int private_file_type(const char *path);
+
+char *private_get_string_in_file_content(const char * path){
     long size;
     bool is_binary;
-    unsigned char *element = dtw_load_any_content(path,&size,&is_binary);
+    unsigned char *element = private_get_any_content(path,&size,&is_binary);
     if(element == NULL){
         return NULL;
     }
@@ -31,13 +29,13 @@ char *dtw_load_string_file_content(const char * path){
     return (char*)element;
 }
 
-unsigned char *dtw_load_any_content(const char * path,long *size,bool *is_binary){
+unsigned char *private_get_any_content(const char * path,long *size,bool *is_binary){
 
     *is_binary = false;
     *size = 0;
 
-    int entity = dtw_entity_type(path);
-    if(entity != DTW_FILE_TYPE){
+    int entity = private_file_type(path);
+    if(entity != PRIVATE_FILE_TYPE){
         return NULL;
     }
     FILE  *file = fopen(path,"rb");
@@ -93,20 +91,19 @@ unsigned char *dtw_load_any_content(const char * path,long *size,bool *is_binary
     return content;
 }
 
-int dtw_entity_type(const char *path){
+int private_file_type(const char *path){
     //returns 1 for file, 2 for directory, -1 for not found
     struct stat path_stat;
 
     if(stat(path,&path_stat) == 0){
         if(S_ISREG(path_stat.st_mode)){
-            return DTW_FILE_TYPE;
+            return PRIVATE_FILE_TYPE;
         }else if(S_ISDIR(path_stat.st_mode)){
-            return DTW_FOLDER_TYPE;
+            return PRIVATE_FOLDER_TYPE;
         }
     }
-    return DTW_NOT_FOUND;
+    return PRIVATE_NOT_FOUND;
 
 }
-
-
+#endif // !PRIVATE_ASSEMBLY_FILES__H
 
