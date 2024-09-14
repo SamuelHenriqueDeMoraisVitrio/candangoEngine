@@ -5,11 +5,14 @@
 //silver_chain_scope_end
 
 
-bool private_is_valid_variable(const char *str, int len) {
+bool private_is_valid_variable(LuaCEmbedNamespace lua, LuaCEmbed *l, const char *str, int len) {
     for (int i = 0; i < len; i++) {
         if (!(isalnum(str[i]) || str[i] == '_')) {  
             return false;
         }
+    }
+    if(lua.globals.get_type(l, str) == 0){
+        return false;
     }
     return true;
 }
@@ -132,6 +135,14 @@ char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
             str++;
             continue;
         }
+        if(*str == '\"'){
+            if(!inside_braces){
+                result_str = private_str_append(result_str, "%s = %s .. \"\\\"\"", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA); 
+                str++;
+                continue;
+            }
+            *str = ' ';
+        }
         if (*str == '`' && !inside_braces) {
             if (inside_quotes && *str == quote_type) {
                 inside_quotes = false;
@@ -157,18 +168,18 @@ char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
             }
             valor_buffer[valor_index] = '\0';
 
-            if (private_is_valid_variable(valor_buffer, valor_index)) {
+            if (private_is_valid_variable(lua, l, valor_buffer, valor_index)) {
                 result_str = private_str_append(result_str, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
             } else {
                 result_str = private_str_append(result_str, " %s = %s .. \"{%s}\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
             }
         } else {
-            if (!inside_braces || inside_quotes) {
+            if (!inside_braces) {
                 result_str = private_str_append(result_str, " %s = %s .. \"%c\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, *str);
             }
         }
 
-        str++;
+            str++;
     }
     
 

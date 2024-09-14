@@ -29,7 +29,7 @@ int main() {
     
   char *texto_formatado = private_render_text_by_lua(lua_n, l, texto);
 
-  printf("\n\t%s\n\n", texto_formatado);
+  printf("\n\t!%s!\n\n", texto_formatado);
   
 
   lua_n.free(l);
