@@ -1,8 +1,10 @@
 
-#ifndef PRIVATE_ASSEMBLY_FILES__H
-#define PRIVATE_ASSEMBLY_FILES__H
+//silver_chain_scope_start
+//mannaged by silver chain
+#include "../imports/imports.dep.h"
+//silver_chain_scope_end
 
-#include "../../imports.h"
+
 
 #define PRIVATE_FILE_TYPE 1
 #define PRIVATE_FOLDER_TYPE 2
@@ -105,5 +107,4 @@ int private_file_type(const char *path){
     return PRIVATE_NOT_FOUND;
 
 }
-#endif // !PRIVATE_ASSEMBLY_FILES__H
 
