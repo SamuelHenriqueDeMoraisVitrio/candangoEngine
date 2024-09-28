@@ -11,6 +11,8 @@ bool private_is_valid_variable(LuaCEmbedNamespace lua, LuaCEmbed *l, const char 
 
 //bool private_verifyr_second_open_bracket(LuaCEmbedNamespace lua, LuaCEmbed *l, char **str);
 
+void append_with_struct_condition(char *result_str, const char *format, ...);
+
 char *private_recursivly_str_in_struct(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str);
 
 char *private_str_append(char *dest, const char *src, ...);

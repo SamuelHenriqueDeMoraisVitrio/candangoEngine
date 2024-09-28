@@ -24,7 +24,7 @@ int main() {
   lua_n.evaluate(l, "samuel_Henrique = \"Samuelzão\"");
   lua_n.evaluate(l, "idade_banco = 20");
   lua_n.evaluate(l, "nome = \"Samuel Henrique de Morais Vitrio\"");
-  lua_n.evaluate(l, "variavel = \"Variavel nome\"");
+  //lua_n.evaluate(l, "variavel = \"Variavel nome\"");
 
   char *texto = private_get_string_in_file_content("testes/teste_home.html");
     
