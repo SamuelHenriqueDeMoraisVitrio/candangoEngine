@@ -2,7 +2,6 @@
 //silver_chain_scope_start
 //mannaged by silver chain
 #include "../../imports/imports.dec.h"
-#include <stdbool.h>
 //silver_chain_scope_end
 
 
@@ -76,9 +75,12 @@ bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbedNamespace lua, LuaC
     strncpy(text_formated, *str + start_main, final_bracket_main - start_main - 1);
     text_formated[final_bracket_main - start_main - 1] = '\0';
 
-    *result = private_str_append(*result, " %s %s end", text_no_formated, private_process_block(lua, l, text_formated));
+    char *result_str_leak = private_process_block(lua, l, text_formated);
+    *result = private_str_append(*result, " %s %s end", text_no_formated, result_str_leak);
 
     *str = *str + final_bracket_main;
+
+    free(result_str_leak);
 
     return true;
 }
@@ -88,108 +90,32 @@ char *private_str_append(char *dest, const char *format, ...) {
     va_start(args, format);
     
     char temp[1];
-    int size = vsnprintf(temp, 1, format, args) + 1;
+    int size = vsnprintf(temp, sizeof(temp), format, args) + 1;
     va_end(args);
 
     char *formatted_str = (char *)malloc(size);
     if (formatted_str == NULL) {
         return NULL;
     }
-    
+
     va_start(args, format);
-    vsprintf(formatted_str, format, args);
+    vsnprintf(formatted_str, size, format, args);
     va_end(args);
 
     if (dest == NULL) {
-        dest = (char *)malloc(size);
-        strcpy(dest, formatted_str);
+        dest = formatted_str;
     } else {
-        dest = (char *)realloc(dest, strlen(dest) + size);
+        char *new_dest = (char *)realloc(dest, strlen(dest) + size);
+        if (new_dest == NULL) {
+            free(formatted_str);
+            return NULL;
+        }
+        dest = new_dest;
         strcat(dest, formatted_str);
+        free(formatted_str);
     }
 
-    free(formatted_str);
     return dest;
-}
-
-/*
-char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
-
-    char *result_str = NULL;
-
-    if (!str) {
-        return "";
-    }
-
-    bool inside_quotes = false;
-    char quote_type = '\0';
-    bool inside_braces = false;
-    const char *start = NULL;
-    char valor_buffer[200];
-    int valor_index = 0;
-    bool formater_start = false;
-    bool formater_text_start = false;
-    bool open_brackets_by_text_no_formating = false;
-
-    while (*str != '\0') {
-        if(*str == '\n'){
-            str++;
-            continue;
-        }
-        if(*str == '\"'){
-            if(!inside_braces){
-                result_str = private_str_append(result_str, "%s = %s .. \"\\\"\"", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA); 
-                str++;
-                continue;
-            }
-            *str = ' ';
-        }
-        if (*str == '`' && !inside_braces) {
-            if (inside_quotes && *str == quote_type) {
-                inside_quotes = false;
-            } else if (!inside_quotes) {
-                inside_quotes = true;
-                quote_type = *str;
-            }
-            result_str = private_str_append(result_str, " %s = %s .. \"%c\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, *str);
-        } else if (*str == '{' && !inside_quotes) {
-            open_brackets_by_text_no_formating = private_verifyr_second_open_bracket_recurslivy(lua, l, &str, &result_str);
-            if(!open_brackets_by_text_no_formating){
-                inside_braces = true;
-                start = str + 1;
-                valor_index = 0;
-            }
-            open_brackets_by_text_no_formating = false;
-        } else if (*str == '}' && inside_braces) {
-            inside_braces = false;
-
-            const char *p = start;
-            while (p != str && valor_index < sizeof(valor_buffer) - 1) {
-                valor_buffer[valor_index++] = *p++;
-            }
-            valor_buffer[valor_index] = '\0';
-
-            if (private_is_valid_variable(lua, l, valor_buffer, valor_index)) {
-                result_str = private_str_append(result_str, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
-            } else {
-                result_str = private_str_append(result_str, " %s = %s .. \"{%s}\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
-            }
-        } else {
-            if (!inside_braces) {
-                result_str = private_str_append(result_str, " %s = %s .. \"%c\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, *str);
-            }
-        }
-
-            str++;
-    }
-    
-
-    return result_str;
-}
-*/
-
-void append_with_struct_condition(char *result_str, const char *format, ...){
-
 }
 
 char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
@@ -299,9 +225,117 @@ char *private_render_text_by_lua(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str
         return lua.globals.get_string(l, VARABLE_GLOBAL_TEXT_BY_LUA);
     }
 
-    lua.evaluate(l, " %s ", private_process_block(lua, l, str));
+    char *result_str = private_process_block(lua, l, str);
+
+    lua.evaluate(l, " %s ", result_str);
+
+    free(result_str);
 
     return lua.globals.get_string(l, VARABLE_GLOBAL_TEXT_BY_LUA);
 }
 
+/*
+char *private_str_append(char *dest, const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+    
+    char temp[1];
+    int size = vsnprintf(temp, 1, format, args) + 1;
+    va_end(args);
 
+    char *formatted_str = (char *)malloc(size);
+    if (formatted_str == NULL) {
+        free(formatted_str);
+        return NULL;
+    }
+    
+    va_start(args, format);
+    vsprintf(formatted_str, format, args);
+    va_end(args);
+
+    if (dest == NULL) {
+        dest = (char *)malloc(size);
+        strcpy(dest, formatted_str);
+    } else {
+        dest = (char *)realloc(dest, strlen(dest) + size);
+        strcat(dest, formatted_str);
+    }
+
+    free(formatted_str);
+    return dest;
+}
+
+char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
+
+    char *result_str = NULL;
+
+    if (!str) {
+        return "";
+    }
+
+    bool inside_quotes = false;
+    char quote_type = '\0';
+    bool inside_braces = false;
+    const char *start = NULL;
+    char valor_buffer[200];
+    int valor_index = 0;
+    bool formater_start = false;
+    bool formater_text_start = false;
+    bool open_brackets_by_text_no_formating = false;
+
+    while (*str != '\0') {
+        if(*str == '\n'){
+            str++;
+            continue;
+        }
+        if(*str == '\"'){
+            if(!inside_braces){
+                result_str = private_str_append(result_str, "%s = %s .. \"\\\"\"", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA); 
+                str++;
+                continue;
+            }
+            *str = ' ';
+        }
+        if (*str == '`' && !inside_braces) {
+            if (inside_quotes && *str == quote_type) {
+                inside_quotes = false;
+            } else if (!inside_quotes) {
+                inside_quotes = true;
+                quote_type = *str;
+            }
+            result_str = private_str_append(result_str, " %s = %s .. \"%c\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, *str);
+        } else if (*str == '{' && !inside_quotes) {
+            open_brackets_by_text_no_formating = private_verifyr_second_open_bracket_recurslivy(lua, l, &str, &result_str);
+            if(!open_brackets_by_text_no_formating){
+                inside_braces = true;
+                start = str + 1;
+                valor_index = 0;
+            }
+            open_brackets_by_text_no_formating = false;
+        } else if (*str == '}' && inside_braces) {
+            inside_braces = false;
+
+            const char *p = start;
+            while (p != str && valor_index < sizeof(valor_buffer) - 1) {
+                valor_buffer[valor_index++] = *p++;
+            }
+            valor_buffer[valor_index] = '\0';
+
+            if (private_is_valid_variable(lua, l, valor_buffer, valor_index)) {
+                result_str = private_str_append(result_str, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
+            } else {
+                result_str = private_str_append(result_str, " %s = %s .. \"{%s}\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
+            }
+        } else {
+            if (!inside_braces) {
+                result_str = private_str_append(result_str, " %s = %s .. \"%c\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, *str);
+            }
+        }
+
+            str++;
+    }
+    
+
+    return result_str;
+}
+*/

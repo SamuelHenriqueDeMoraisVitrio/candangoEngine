@@ -6,6 +6,9 @@ RUN_CMD=./${OUT}
 
 all: comp run
 
+valgrind: comp
+	@valgrind ${RUN_CMD}
+
 run:
 	@echo ""
 	@${RUN_CMD}
