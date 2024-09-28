@@ -1,7 +1,7 @@
 
 PRIVATE_STRING_OF_CONTENT_BY_FILE = ""
 
-function sla() return "Samuel" end
+function sla() return PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "Samuel" end
 
 
-print(PRIVATE_STRING_OF_CONTENT_BY_FILE .. sla())
+print(sla())

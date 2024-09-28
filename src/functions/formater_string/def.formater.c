@@ -77,6 +77,7 @@ bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbedNamespace lua, LuaC
 
     *result = private_str_append(*result, " %s %s end", text_no_formated, private_process_block(lua, l, text_formated));
 
+    printf("\n\tresult: \n\n!%s!\n\n", *result);
     *str = *str + final_bracket_main;
 
     return true;
