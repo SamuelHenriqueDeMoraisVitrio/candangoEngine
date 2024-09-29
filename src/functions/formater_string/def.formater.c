@@ -84,6 +84,123 @@ bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbedNamespace lua, LuaC
 
     return true;
 }
+/*
+bool private_verifyr_function_call(LuaCEmbedNamespace lua, LuaCEmbed *l, char **str, char **result){
+
+    bool is_function = false;
+    bool is_valid = false;
+    bool start_call = false;
+    bool close_call = false;
+    int start_function_call = 0;
+    int close_function_call = 0;
+    int count_lines = 0;
+
+    while(true){
+        count_lines++;
+        if (*(*str + count_lines) == '\0') {
+            return false;
+        }
+        if (*(*str + count_lines) == ' ') {
+            continue;
+        }
+        if(*(*str + count_lines) == '\n'){
+            *(*str + count_lines) = ' ';
+        }
+        if(*(*str + count_lines) == '!'){
+            start_call = true;
+            start_function_call = count_lines + 1;
+            if(*(*str + start_function_call) == '}'){
+                return false;
+            }
+        }
+        if(*(*str + count_lines) == '}'){
+            if(!start_call){
+                return false;
+            }
+            close_function_call = count_lines - 1;
+            if(*(*str + close_function_call) == '!'){
+                return false;
+            }
+            close_call = true;
+            break;
+        }
+    }
+
+    if(!close_call){
+        return false;
+    }
+
+    char text_call[1 + close_function_call - start_function_call];
+    
+    strncpy(text_call, *str + start_function_call + 1, close_function_call - start_function_call - 1);
+    text_call[close_function_call - start_function_call - 1] = '\0';
+
+    *result = private_str_append(*result, " %s = %s .. %s() ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, text_call);
+
+    *str = *str + close_function_call + 2;
+
+    return true;
+}
+*/
+
+bool private_verifyr_function_call(LuaCEmbedNamespace lua, LuaCEmbed *l, char **str, char **result) {
+    bool start_call = false;
+    bool close_call = false;
+    int start_function_call = 0;
+    int close_function_call = 0;
+    int count_lines = 0;
+
+    while (*(*str + count_lines) == ' ') {
+        count_lines++;
+    }
+
+    while (true) {
+        if (*(*str + count_lines) == '\0') {
+            return false;
+        }
+        if (*(*str + count_lines) == '!') {
+            start_call = true;
+            start_function_call = count_lines + 1;
+            if (*(*str + start_function_call) == '}') {
+                return false;
+            }
+        } else if (*(*str + count_lines) == '}') {
+            if (!start_call) {
+                return false;
+            }
+            close_function_call = count_lines;
+            close_call = true;
+            break;
+        }
+        count_lines++;
+    }
+
+    if (!close_call) {
+        return false;
+    }
+
+    int length = close_function_call - start_function_call;
+
+    if (length <= 0) {
+        return false;
+    }
+
+    char text_call[length + 1];
+    strncpy(text_call, *str + start_function_call, length);
+    text_call[length] = '\0';
+
+    lua.evaluate(l, " %s = %s()", VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, text_call);
+
+    if(!private_is_valid_variable(lua, l, VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, LENGTH_VARABLE_TEXT_BY_CALL_FUNCTION)){
+        return false;
+    }
+
+    *result = private_str_append(*result, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION);
+
+    *str = *str + close_function_call + 1;
+
+    return true;
+}
 
 char *private_str_append(char *dest, const char *format, ...) {
     va_list args;
@@ -176,9 +293,11 @@ char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
             }
             open_brackets_by_text_no_formating = private_verifyr_second_open_bracket_recurslivy(lua, l, &str, &result_str);
             if(!open_brackets_by_text_no_formating){
-                inside_braces = true;
-                start = str + 1;
-                valor_index = 0;
+                if(!private_verifyr_function_call(lua, l, &str, &result_str)){
+                    inside_braces = true;
+                    start = str + 1;
+                    valor_index = 0;
+                }
             }
             open_brackets_by_text_no_formating = false;
         } else if (*str == '}' && inside_braces) {

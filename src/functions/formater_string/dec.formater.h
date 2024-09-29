@@ -21,4 +21,6 @@ bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbedNamespace lua, LuaC
 
 char *private_render_text_by_lua(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str);
 
+bool private_verifyr_function_call(LuaCEmbedNamespace lua, LuaCEmbed *l, char **str, char **result);
+
 

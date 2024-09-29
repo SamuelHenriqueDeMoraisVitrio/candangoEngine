@@ -25,13 +25,14 @@ int main() {
   lua_n.evaluate(l, "idade_banco = 20");
   lua_n.evaluate(l, "nome = \"Samuel Henrique de Morais Vitrio\"");
   lua_n.evaluate(l, "variavel = \"Variavel nome\"");
+  lua_n.evaluate(l, "function slasla() return \"samuel\" end");
 
   char *texto = private_get_string_in_file_content("testes/teste_home.html");
     
   char *texto_formatado = private_render_text_by_lua(lua_n, l, texto);
 
   printf("\n\t!%s!\n\n", texto_formatado);
-  
+
 
   lua_n.free(l);
   free(texto);
