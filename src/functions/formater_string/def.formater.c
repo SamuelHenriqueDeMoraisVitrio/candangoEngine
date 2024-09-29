@@ -5,7 +5,7 @@
 //silver_chain_scope_end
 
 
-bool private_is_valid_variable(LuaCEmbedNamespace lua, LuaCEmbed *l, const char *str, int len) {
+bool private_is_valid_variable(LuaCEmbed *l, const char *str, int len) {
     for (int i = 0; i < len; i++) {
         if (!(isalnum(str[i]) || str[i] == '_')) {  
             return false;
@@ -17,7 +17,7 @@ bool private_is_valid_variable(LuaCEmbedNamespace lua, LuaCEmbed *l, const char 
     return true;
 }
 
-bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbedNamespace lua, LuaCEmbed *l, char **str, char **result) {
+bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, char **result) {
 
     int count_second_bracket = 0;
     int start_second = 0;
@@ -75,7 +75,7 @@ bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbedNamespace lua, LuaC
     strncpy(text_formated, *str + start_main, final_bracket_main - start_main - 1);
     text_formated[final_bracket_main - start_main - 1] = '\0';
 
-    char *result_str_leak = private_process_block(lua, l, text_formated);
+    char *result_str_leak = private_process_block(l, text_formated);
     *result = private_str_append(*result, " %s %s end", text_no_formated, result_str_leak);
 
     *str = *str + final_bracket_main;
@@ -143,7 +143,7 @@ bool private_verifyr_function_call(LuaCEmbedNamespace lua, LuaCEmbed *l, char **
 }
 */
 
-bool private_verifyr_function_call(LuaCEmbedNamespace lua, LuaCEmbed *l, char **str, char **result) {
+bool private_verifyr_function_call(LuaCEmbed *l, char **str, char **result) {
     bool start_call = false;
     bool close_call = false;
     int start_function_call = 0;
@@ -191,7 +191,7 @@ bool private_verifyr_function_call(LuaCEmbedNamespace lua, LuaCEmbed *l, char **
 
     lua.evaluate(l, " %s = %s()", VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, text_call);
 
-    if(!private_is_valid_variable(lua, l, VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, LENGTH_VARABLE_TEXT_BY_CALL_FUNCTION)){
+    if(!private_is_valid_variable(l, VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, LENGTH_VARABLE_TEXT_BY_CALL_FUNCTION)){
         return false;
     }
 
@@ -235,7 +235,7 @@ char *private_str_append(char *dest, const char *format, ...) {
     return dest;
 }
 
-char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
+char *private_process_block(LuaCEmbed *l, char *str) {
 
     char *result_str = NULL;
 
@@ -291,9 +291,9 @@ char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
                 result_str = private_str_append(result_str, "\" ");
                 started_a_string = false;
             }
-            open_brackets_by_text_no_formating = private_verifyr_second_open_bracket_recurslivy(lua, l, &str, &result_str);
+            open_brackets_by_text_no_formating = private_verifyr_second_open_bracket_recurslivy(l, &str, &result_str);
             if(!open_brackets_by_text_no_formating){
-                if(!private_verifyr_function_call(lua, l, &str, &result_str)){
+                if(!private_verifyr_function_call(l, &str, &result_str)){
                     inside_braces = true;
                     start = str + 1;
                     valor_index = 0;
@@ -309,7 +309,7 @@ char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
             }
             valor_buffer[valor_index] = '\0';
 
-            if (private_is_valid_variable(lua, l, valor_buffer, valor_index)) {
+            if (private_is_valid_variable(l, valor_buffer, valor_index)) {
                 result_str = private_str_append(result_str, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
             } else {
                 result_str = private_str_append(result_str, " %s = %s .. \"{%s}\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
@@ -336,21 +336,28 @@ char *private_process_block(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str) {
     return result_str;
 }
 
-char *private_render_text_by_lua(LuaCEmbedNamespace lua, LuaCEmbed *l, char *str){
+LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
     
-    lua.evaluate(l, "%s = \"\"", VARABLE_GLOBAL_TEXT_BY_LUA);
+    char *str = lua.args.get_str(args, 0);
+
+    lua.evaluate(args, "%s = \"\"", VARABLE_GLOBAL_TEXT_BY_LUA);
+
+    char *response;
 
     if (!str) {
-        return lua.globals.get_string(l, VARABLE_GLOBAL_TEXT_BY_LUA);
+        response = lua.globals.get_string(args, VARABLE_GLOBAL_TEXT_BY_LUA);
+        return lua.response.send_str(response);
     }
 
-    char *result_str = private_process_block(lua, l, str);
+    char *result_str = private_process_block(args, str);
 
-    lua.evaluate(l, " %s ", result_str);
+    lua.evaluate(args, " %s ", result_str);
 
     free(result_str);
 
-    return lua.globals.get_string(l, VARABLE_GLOBAL_TEXT_BY_LUA);
+    response = lua.globals.get_string(args, VARABLE_GLOBAL_TEXT_BY_LUA);
+
+    return lua.response.send_str(response);
 }
 
 /*
