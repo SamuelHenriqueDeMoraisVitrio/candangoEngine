@@ -1,21 +1,33 @@
 
 GC=gcc
-SRC=src/one.c
-OUT=teste.out
+OPTIONS=-shared -fpic -o
+SRC=src/main.c
+OUT=candangoEngine/candango_engine.so
 RUN_CMD=./${OUT}
+EXEC_LUA=lua
+RUN_LUA=testes/teste.lua
+CONCAT_LUA=${EXEC_LUA} ${RUN_LUA}
 
-all: comp run
+all: clear run
 
-valgrind: comp
-	@valgrind ${RUN_CMD}
+valgrind: clear
+	@valgrind ${CONCAT_LUA}
 
 run:
 	@echo ""
-	@${RUN_CMD}
+	@echo "	Executando ..."
+	@echo ""
+	@${CONCAT_LUA}
+
+comp: clear
+	@echo ""
+	${GC} ${SRC} ${OPTIONS} ${OUT}
+	@echo ""
+	@echo " 	Compilação concluida.			"
 	@echo ""
 
-comp:
+clear:
+	clear
 	@echo ""
-	${GC} ${SRC} -o ${OUT}
+	@ls -lah --color=always
 	@echo ""
-
