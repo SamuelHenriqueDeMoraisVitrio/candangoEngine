@@ -7,11 +7,11 @@
 
 bool private_is_valid_variable(LuaCEmbed *l, const char *str, int len) {
     for (int i = 0; i < len; i++) {
-        if (!(isalnum(str[i]) || str[i] == '_')) {  
+        if (str[i] == ' ' || str[i] == '{' || str[i] == '}'){ //!(isalnum(str[i]) || str[i] == '_' || str[i] == '[' || str == ']' || str == '\'' || str == '\"')){
             return false;
         }
     }
-    if(lua.globals.get_type(l, str) == 0){
+    if(!lua.get_string_evaluation(l, str)){
         return false;
     }
     return true;
@@ -212,7 +212,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
                 str++;
                 continue;
             }
-            *str = ' ';
+            //*str = ' ';
         }
         if (*str == '`' && !inside_braces) {
             if (inside_quotes && *str == quote_type) {
@@ -282,6 +282,10 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
     
     char *str = lua.args.get_str(args, 0);
 
+    if (lua.has_errors(args)) {
+        return NULL;
+    }
+
     lua.evaluate(args, "%s = \"\"", VARABLE_GLOBAL_TEXT_BY_LUA);
 
     char *response;
@@ -296,6 +300,10 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
     lua.evaluate(args, " %s ", result_str);
 
     free(result_str);
+
+    if (lua.has_errors(args)) {
+        return NULL;
+    }
 
     response = lua.globals.get_string(args, VARABLE_GLOBAL_TEXT_BY_LUA);
 
