@@ -131,7 +131,7 @@ bool private_verifyr_function_call(LuaCEmbed *l, char **str, char **result) {
     strncpy(text_call, *str + start_function_call, length);
     text_call[length] = '\0';
 
-    lua.evaluate(l, " %s = %s()", VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, text_call);
+    lua.evaluate(l, " %s = %s", VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, text_call);
 
     if(!private_is_valid_variable(l, VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, LENGTH_VARABLE_TEXT_BY_CALL_FUNCTION)){
         return false;
