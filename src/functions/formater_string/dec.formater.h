@@ -14,6 +14,8 @@ char *private_process_block(LuaCEmbed *l, char *str);
 
 bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, char **result);
 
+bool private_verifyr_raw_code_call(LuaCEmbed *l, char **str, char **result);
+
 LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args);
 
 bool private_verifyr_function_call(LuaCEmbed *l, char **str, char **result);

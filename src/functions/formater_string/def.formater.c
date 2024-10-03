@@ -144,6 +144,69 @@ bool private_verifyr_function_call(LuaCEmbed *l, char **str, char **result) {
     return true;
 }
 
+bool private_verifyr_raw_code_call(LuaCEmbed *l, char **str, char **result) {
+    
+    bool start_call = false;
+    bool close_call = false;
+    int start_function_call = 0;
+    int close_function_call = 0;
+    int count_lines = 0;
+    int open_brackets = 0;
+
+    
+
+    while (true) {
+        count_lines++;
+        if (*(*str + count_lines) == '\0') {
+            printf("\\0");
+            return false;
+        }
+        if (*(*str + count_lines) == '%') {
+            start_call = true;
+            start_function_call = count_lines + 1;
+            if (*(*str + start_function_call) == '}') {
+                return false;
+            }
+        } else if (*(*str + count_lines) == '}') {
+            if (!start_call) {
+                return false;
+            }
+            if(open_brackets < 1){
+                close_function_call = count_lines;
+                close_call = true;
+                break;
+            }
+            open_brackets--;
+        } else if (*(*str + count_lines) == '{') {
+            if(!start_call){
+                return false;
+            }
+            open_brackets++;
+        }
+    }
+
+
+    if (!close_call) {
+        return false;
+    }
+
+    int length = close_function_call - start_function_call;
+
+    if (length <= 0) {
+        return false;
+    }
+
+    char text_call[length + 1];
+    strncpy(text_call, *str + start_function_call, length);
+    text_call[length] = '\0';
+
+    *result = private_str_append(*result, " %s ", text_call);
+
+    *str = *str + close_function_call + 1;
+
+    return true;
+}
+
 char *private_str_append(char *dest, const char *format, ...) {
     va_list args;
     va_start(args, format);
@@ -236,9 +299,11 @@ char *private_process_block(LuaCEmbed *l, char *str) {
             open_brackets_by_text_no_formating = private_verifyr_second_open_bracket_recurslivy(l, &str, &result_str);
             if(!open_brackets_by_text_no_formating){
                 if(!private_verifyr_function_call(l, &str, &result_str)){
-                    inside_braces = true;
-                    start = str + 1;
-                    valor_index = 0;
+                    if(!private_verifyr_raw_code_call(l, &str, &result_str)){
+                        inside_braces = true;
+                        start = str + 1;
+                        valor_index = 0;
+                    }
                 }
             }
             open_brackets_by_text_no_formating = false;
@@ -296,6 +361,8 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
     }
 
     char *result_str = private_process_block(args, str);
+
+    printf("\n%s\n", result_str);
 
     lua.evaluate(args, " %s ", result_str);
 
