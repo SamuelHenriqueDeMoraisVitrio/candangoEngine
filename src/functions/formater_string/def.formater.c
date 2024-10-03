@@ -2,20 +2,8 @@
 //silver_chain_scope_start
 //mannaged by silver chain
 #include "../../imports/imports.dec.h"
+#include <stdio.h>
 //silver_chain_scope_end
-
-
-bool private_is_valid_variable(LuaCEmbed *l, const char *str, int len) {
-    for (int i = 0; i < len; i++) {
-        if (str[i] == ' ' || str[i] == '{' || str[i] == '}'){ //!(isalnum(str[i]) || str[i] == '_' || str[i] == '[' || str == ']' || str == '\'' || str == '\"')){
-            return false;
-        }
-    }
-    if(!lua.get_string_evaluation(l, str)){
-        return false;
-    }
-    return true;
-}
 
 bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, char **result) {
 
@@ -133,10 +121,6 @@ bool private_verifyr_function_call(LuaCEmbed *l, char **str, char **result) {
 
     lua.evaluate(l, " %s = %s", VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, text_call);
 
-    if(!private_is_valid_variable(l, VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, LENGTH_VARABLE_TEXT_BY_CALL_FUNCTION)){
-        return false;
-    }
-
     *result = private_str_append(*result, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION);
 
     *str = *str + close_function_call + 1;
@@ -158,7 +142,6 @@ bool private_verifyr_raw_code_call(LuaCEmbed *l, char **str, char **result) {
     while (true) {
         count_lines++;
         if (*(*str + count_lines) == '\0') {
-            printf("\\0");
             return false;
         }
         if (*(*str + count_lines) == '%') {
@@ -296,10 +279,10 @@ char *private_process_block(LuaCEmbed *l, char *str) {
                 result_str = private_str_append(result_str, "\" ");
                 started_a_string = false;
             }
-            open_brackets_by_text_no_formating = private_verifyr_second_open_bracket_recurslivy(l, &str, &result_str);
-            if(!open_brackets_by_text_no_formating){
-                if(!private_verifyr_function_call(l, &str, &result_str)){
-                    if(!private_verifyr_raw_code_call(l, &str, &result_str)){
+            if(!private_verifyr_raw_code_call(l, &str, &result_str)){
+                open_brackets_by_text_no_formating = private_verifyr_second_open_bracket_recurslivy(l, &str, &result_str);
+                if(!open_brackets_by_text_no_formating){
+                    if(!private_verifyr_function_call(l, &str, &result_str)){
                         inside_braces = true;
                         start = str + 1;
                         valor_index = 0;
@@ -316,11 +299,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
             }
             valor_buffer[valor_index] = '\0';
 
-            if (private_is_valid_variable(l, valor_buffer, valor_index)) {
-                result_str = private_str_append(result_str, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
-            } else {
-                result_str = private_str_append(result_str, " %s = %s .. \"{%s}\" ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
-            }
+            result_str = private_str_append(result_str, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
         } else {
             if (!inside_braces) {
                 if(!started_a_string){
@@ -362,19 +341,22 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
 
     char *result_str = private_process_block(args, str);
 
-    printf("\n%s\n", result_str);
-
     lua.evaluate(args, " %s ", result_str);
 
     free(result_str);
+    
+    LuaCEmbedTable *table_response = lua.tables.new_anonymous_table(args);
 
     if (lua.has_errors(args)) {
-        return NULL;
+        lua.tables.set_bool_prop(table_response, "exist_error", true);
+        lua.tables.set_string_prop(table_response, "error_message", lua.get_error_message(args));
+        return lua.response.send_table(table_response);
     }
 
-    response = lua.globals.get_string(args, VARABLE_GLOBAL_TEXT_BY_LUA);
+    lua.tables.set_bool_prop(table_response, "exist_error", false);
+    lua.tables.set_string_prop(table_response, "render_text", lua.globals.get_string(args, VARABLE_GLOBAL_TEXT_BY_LUA));
 
-    return lua.response.send_str(response);
+    return lua.response.send_table(table_response);
 }
 
 

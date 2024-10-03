@@ -7,10 +7,10 @@
     </head>
     <body>
 
-        {%samuel_h = "samuel_h"}
-        {samuel_h}
+        {%samuel_h = {"samuel_h"}}
+        {samuel_h[1]}
         {variavel["nsei"]}
-        {{if false then}
+        {{if samuel_h[2] == "samuel_h" then}
             "texto"
             {%else}
             "texto do caso não"

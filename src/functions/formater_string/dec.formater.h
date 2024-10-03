@@ -4,8 +4,6 @@
 #include "../../imports/imports.globals.h"
 //silver_chain_scope_end
 
-bool private_is_valid_variable(LuaCEmbed *l, const char *str, int len);
-
 char *private_recursivly_str_in_struct(LuaCEmbed *l, char *str);
 
 char *private_str_append(char *dest, const char *src, ...);

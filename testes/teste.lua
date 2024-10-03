@@ -12,17 +12,19 @@ variavel.nsei = "samuel"
 
 local text_formated = candango.Render_text(candango.Get_text_by_file_content("testes/teste_home.html"))
 
-if text_formated then
+if not text_formated.exist_error then
     local arquivo = io.open("testes/response.html", "w")
 
     if arquivo then
-        arquivo:write(text_formated)
+        arquivo:write(text_formated.render_text)
 
         arquivo:close()
         print("Texto salvo com sucesso.")
-    else
-        print("Erro ao abrir o arquivo.")
     end
+
+else
+
+    print(text_formated.error_message)
 
 end
 
