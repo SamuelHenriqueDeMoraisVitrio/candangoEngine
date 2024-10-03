@@ -2,7 +2,6 @@
 //silver_chain_scope_start
 //mannaged by silver chain
 #include "../../imports/imports.dec.h"
-#include <stdio.h>
 //silver_chain_scope_end
 
 bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, char **result) {
