@@ -122,7 +122,7 @@ bool private_verifyr_function_call(LuaCEmbed *l, char **str, char **result) {
 
     *result = private_str_append(*result, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION);
 
-    *str = *str + close_function_call + 1;
+    *str = *str + close_function_call;
 
     return true;
 }
@@ -184,7 +184,7 @@ bool private_verifyr_raw_code_call(LuaCEmbed *l, char **str, char **result) {
 
     *result = private_str_append(*result, " %s ", text_call);
 
-    *str = *str + close_function_call + 1;
+    *str = *str + close_function_call;
 
     return true;
 }
