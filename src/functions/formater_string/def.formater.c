@@ -26,7 +26,7 @@ bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, ch
         if(*(*str + count_second_bracket) == '\n'){
             *(*str + count_second_bracket) = ' ';
         }
-        if (*(*str + count_second_bracket) == '}') {
+        if (*(*str + count_second_bracket) == CLOSE_BRACKETS_CARACTER) {
             if (!open_second) {
                 return false;
             }
@@ -43,7 +43,7 @@ bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, ch
             final_bracket_main = count_second_bracket + 1;
             break;
         }
-        if (*(*str + count_second_bracket) == '{') {
+        if (*(*str + count_second_bracket) == OPEN_BRACKETS_CARACTER) {
             if (!open_second) {
                 start_second = count_second_bracket;
                 open_second = true;
@@ -87,13 +87,13 @@ bool private_verifyr_function_call(LuaCEmbed *l, char **str, char **result) {
         if (*(*str + count_lines) == '\0') {
             return false;
         }
-        if (*(*str + count_lines) == '!') {
+        if (*(*str + count_lines) == EXCLAMATION_CARACTER) {
             start_call = true;
             start_function_call = count_lines + 1;
-            if (*(*str + start_function_call) == '}') {
+            if (*(*str + start_function_call) == CLOSE_BRACKETS_CARACTER) {
                 return false;
             }
-        } else if (*(*str + count_lines) == '}') {
+        } else if (*(*str + count_lines) == CLOSE_BRACKETS_CARACTER) {
             if (!start_call) {
                 return false;
             }
@@ -141,13 +141,13 @@ bool private_verifyr_raw_code_call(LuaCEmbed *l, char **str, char **result) {
         if (*(*str + count_lines) == '\0') {
             return false;
         }
-        if (*(*str + count_lines) == '%') {
+        if (*(*str + count_lines) == PERCENT_CARACTER) {
             start_call = true;
             start_function_call = count_lines + 1;
-            if (*(*str + start_function_call) == '}') {
+            if (*(*str + start_function_call) == CLOSE_BRACKETS_CARACTER) {
                 return false;
             }
-        } else if (*(*str + count_lines) == '}') {
+        } else if (*(*str + count_lines) == CLOSE_BRACKETS_CARACTER) {
             if (!start_call) {
                 return false;
             }
@@ -157,7 +157,7 @@ bool private_verifyr_raw_code_call(LuaCEmbed *l, char **str, char **result) {
                 break;
             }
             open_brackets--;
-        } else if (*(*str + count_lines) == '{') {
+        } else if (*(*str + count_lines) == OPEN_BRACKETS_CARACTER) {
             if(!start_call){
                 return false;
             }
@@ -257,7 +257,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
             }
             //*str = ' ';
         }
-        if (*str == '`' && !inside_braces) {
+        if (*str == PHRASES_CARACTER && !inside_braces) {
             if (inside_quotes && *str == quote_type) {
                 inside_quotes = false;
             } else if (!inside_quotes) {
@@ -271,7 +271,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
             }else{
                 result_str = private_str_append(result_str, "%c", *str);
             }
-        } else if (*str == '{' && !inside_quotes) {
+        } else if (*str == OPEN_BRACKETS_CARACTER && !inside_quotes) {
             if(started_a_string){
                 result_str = private_str_append(result_str, "\" ");
                 started_a_string = false;
@@ -287,7 +287,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
                 }
             }
             open_brackets_by_text_no_formating = false;
-        } else if (*str == '}' && inside_braces) {
+        } else if (*str == CLOSE_BRACKETS_CARACTER && inside_braces) {
             inside_braces = false;
 
             const char *p = start;
