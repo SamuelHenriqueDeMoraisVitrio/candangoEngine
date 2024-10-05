@@ -118,9 +118,7 @@ bool private_verifyr_function_call(LuaCEmbed *l, char **str, char **result) {
     strncpy(text_call, *str + start_function_call, length);
     text_call[length] = '\0';
 
-    lua.evaluate(l, " %s = %s", VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION, text_call);
-
-    *result = private_str_append(*result, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_LOCAL_TEXT_BY_CALL_FUNCTION);
+    *result = private_str_append(*result, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, text_call);
 
     *str = *str + close_function_call;
 

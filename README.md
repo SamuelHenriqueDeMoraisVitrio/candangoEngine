@@ -3,7 +3,7 @@
 
 ## Overview
 
-The **Candango Engine** is a lightweight Lua-based templating engine that allows you to generate dynamic HTML content by embedding Lua commands directly within HTML files. With this engine, you can leverage Lua’s logic and functions to create flexible and dynamic web pages.
+Candango Engine is a lightweight Lua-based engine that allows you to generate dynamic HTML content by embedding Lua commands directly into HTML files. With this engine, you can leverage Lua's logic and functions to create flexible and dynamic web pages.
 
 ### Key Features:
 - **Lua-powered HTML templating**: Embed Lua variables, functions, and control structures inside HTML.
@@ -35,6 +35,8 @@ The **Candango Engine** is a lightweight Lua-based templating engine that allows
 ## Setup
 
 To use the Candango Engine in your project, first ensure that the `candango_engine` module is properly installed and available to be required in your Lua environment.
+
+To install Candango Engine in your project, simply copy the command provided in releases and run it within your project, or download the latest version in releases.
 
 ### Example Setup
 
@@ -90,11 +92,11 @@ Embed Lua logic inside your HTML structure using the syntax provided by the engi
     </head>
     <body>
         <h1>Welcome, {variables["name"]}</h1>
-        <p>Age: {variables["age"]}</p>
+        <p>Age: {variables.age}</p>
 
-        {{if variables["age"] >= 18 then}}
+        {{if variables["age"] >= 18 then}
             <p>You are an adult.</p>
-        {%else}}
+        {%else}
             <p>You are a minor.</p>
         }
 
@@ -120,9 +122,9 @@ Use double curly braces `{{}}` to start a control structure, such as an `if` con
 
 #### Conditional:
 ```html
-{{if condition then}}
+{{if condition then}
     <p>This will render if the condition is true.</p>
-{%else}}
+{%else}
     <p>This will render if the condition is false.</p>
 }
 ```
@@ -130,7 +132,7 @@ Use double curly braces `{{}}` to start a control structure, such as an `if` con
 #### Loop:
 ```html
 <ul>
-    {{for i = 1, 5 do}}
+    {{for i = 1, 5 do}
         <li>Item {i}</li>
     }
 </ul>
@@ -191,9 +193,9 @@ You can reference Lua variables within your HTML templates using `{}`.
 To implement conditionals and loops, use `{{}}` to start the logic block and `{%}` to inject raw Lua code if necessary.
 
 ```html
-{{if variables["status"] == "active" then}}
+{{if variables["status"] == "active" then}
     <p>Account is active</p>
-{%else}}
+{%else}
     <p>Account is inactive</p>
 }
 ```
@@ -246,9 +248,9 @@ variables = { name = "Samuel", city = "Brasília" }
 
 **HTML Template:**
 ```html
-{{if variables["age"] >= 18 then}}
+{{if variables["age"] >= 18 then}
     <p>Welcome, you are an adult.</p>
-{%else}}
+{%else}
     <p>Sorry, you are not old enough.</p>
 }
 ```
@@ -270,7 +272,7 @@ variables = { name = "Samuel", city = "Brasília" }
 **HTML Template:**
 ```html
 <ul>
-    {{for i = 1, 3 do}}
+    {{for i = 1, 3 do}
         <li>Item {i}</li>
     }
 </ul>

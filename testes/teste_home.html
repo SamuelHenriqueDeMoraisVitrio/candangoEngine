@@ -7,6 +7,12 @@
     </head>
     <body>
 
+        {%
+            local function chaves()
+                return "samu function"
+            end
+        }
+
         {%samuel_h = {"samuel_h"}}
         {samuel_h[1]}
         {variavel["nsei"]}
@@ -14,6 +20,8 @@
             "texto"
             {%else}
             "texto do caso não"
+            {!chaves()}
+            {chaves()}
         }
     
     </body>
