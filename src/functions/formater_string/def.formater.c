@@ -2,7 +2,6 @@
 //silver_chain_scope_start
 //mannaged by silver chain
 #include "../../imports/imports.dec.h"
-#include <stdio.h>
 //silver_chain_scope_end
 
 bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, char **result) {
@@ -66,7 +65,7 @@ bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, ch
     char *result_str_leak = private_process_block(l, text_formated);
     *result = private_str_append(*result, " %s %s end", text_no_formated, result_str_leak);
 
-    *str = *str + final_bracket_main;
+    *str = *str + final_bracket_main - 1;
 
     free(result_str_leak);
 
@@ -224,13 +223,19 @@ char *private_str_append(char *dest, const char *format, ...) {
     return dest;
 }
 
-void private_add_line_breack(char **str, char **result_str, bool started_string){
+void private_add_line_breack(char **str, char **result_str, bool started_string, bool inside_braces){
 
     if(started_string){
         *result_str = private_str_append(*result_str, "\\n");
     }
 
     (*str)++;
+}
+
+void private_init_str_append(char **result, bool *init_str){
+
+    *result = private_str_append(*result, " %s = %s .. \"", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA);
+    *init_str = true;
 }
 
 char *private_process_block(LuaCEmbed *l, char *str) {
@@ -252,9 +257,11 @@ char *private_process_block(LuaCEmbed *l, char *str) {
     bool open_brackets_by_text_no_formating = false;
     bool started_a_string = false;
 
+    
+
     while (*str != '\0') {
         if(*str == '\n'){
-            private_add_line_breack(&str, &result_str, started_a_string);
+            private_add_line_breack(&str, &result_str, started_a_string, inside_braces);
             continue;
         }
         if(*str == '\"'){
@@ -302,6 +309,8 @@ char *private_process_block(LuaCEmbed *l, char *str) {
                         start = str + 1;
                         valor_index = 0;
                     }
+                }else{
+                    private_init_str_append(&result_str, &started_a_string);
                 }
             }
             open_brackets_by_text_no_formating = false;
@@ -315,6 +324,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
             valor_buffer[valor_index] = '\0';
 
             result_str = private_str_append(result_str, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
+            private_init_str_append(&result_str, &started_a_string);
         } else {
             if (!inside_braces) {
                 if(!started_a_string){

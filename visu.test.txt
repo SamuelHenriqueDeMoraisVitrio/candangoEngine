@@ -1,0 +1,335 @@
+clear
+[H[2J[3J
+total 3,8M
+drwxr-xr-x  6 samuelhdmv samuelhdmv 4,0K out 17 04:50 [0m[01;34m.[0m
+drwxr-xr-x 47 samuelhdmv samuelhdmv 4,0K out  9 02:45 [01;34m..[0m
+drwxr-xr-x  2 samuelhdmv samuelhdmv 4,0K out 17 04:52 [01;34mcandangoEngine[0m
+drwxr-xr-x  8 samuelhdmv samuelhdmv 4,0K out 17 04:41 [01;34m.git[0m
+-rw-r--r--  1 samuelhdmv samuelhdmv 1,1K set  6 23:25 LICENSE
+-rw-r--r--  1 samuelhdmv samuelhdmv  758 out  9 20:44 Makefile
+-rw-r--r--  1 samuelhdmv samuelhdmv 7,6K out  5 18:59 README.md
+-rwxr-xr-x  1 samuelhdmv samuelhdmv 197K set 10 23:00 [01;32msilver.out[0m
+drwxr-xr-x  8 samuelhdmv samuelhdmv 4,0K out  5 19:08 [01;34msrc[0m
+-rwxr-xr-x  1 samuelhdmv samuelhdmv 467K out  2 20:39 [01;32mteste.out[0m
+drwxr-xr-x  2 samuelhdmv samuelhdmv 4,0K out  4 00:25 [01;34mtestes[0m
+-rw-r--r--  1 samuelhdmv samuelhdmv 3,1M set 14 15:23 teste.txt
+-rw-r--r--  1 samuelhdmv samuelhdmv   18 out 17 04:52 visu.test.txt
+-rw-r--r--  1 samuelhdmv samuelhdmv   64 set 29 00:21 wath.sh
+
+
+gcc src/main.c -shared -fpic -o candangoEngine/candango_engine.so
+
+ 	Compilação concluida.			
+
+
+	Executando ...
+
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: false
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          
+
+	started a string 0
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: false
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n
+
+	started a string 0
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: false
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  samuel_h = {"samuel_h"} 
+
+	started a string 0
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: false
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  samuel_h = {"samuel_h"} \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. samuel_h[1] 
+
+	started a string 0
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: false
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  samuel_h = {"samuel_h"} \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. samuel_h[1] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. variavel["nsei"] 
+
+	started a string 0
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: false
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  samuel_h = {"samuel_h"} \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. samuel_h[1] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. variavel["nsei"] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  if samuel_h[2] == "samuel_h" then  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto\"             "  else  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto do caso não\"             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "         "  end
+
+	started a string 0
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: false
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  samuel_h = {"samuel_h"} \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. samuel_h[1] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. variavel["nsei"] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  if samuel_h[2] == "samuel_h" then  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto\"             "  else  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto do caso não\"             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "         "  end\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  print("samuel") 
+
+	started a string 0
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  samuel_h = {"samuel_h"} \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. samuel_h[1] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. variavel["nsei"] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  if samuel_h[2] == "samuel_h" then  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto\"             "  else  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto do caso não\"             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "         "  end\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  print("samuel") \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "    
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  samuel_h = {"samuel_h"} \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. samuel_h[1] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. variavel["nsei"] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  if samuel_h[2] == "samuel_h" then  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto\"             "  else  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto do caso não\"             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "         "  end\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  print("samuel") \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "    \n    </body>
+
+	started a string 1
+Bool values:
+inside_quotes: false
+quote_type: ' '
+inside_braces: false
+formater_start: false
+formater_text_start: false
+open_brackets_by_text_no_formating: false
+started_a_string: true
+
+
+
+
+
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  samuel_h = {"samuel_h"} \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. samuel_h[1] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. variavel["nsei"] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  if samuel_h[2] == "samuel_h" then  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto\"             "  else  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto do caso não\"             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "         "  end\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  print("samuel") \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "    \n    </body>\n</html>
+
+	started a string 1
+
+---------------
+ PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title></title>\n        <link href=\"css/style.css\" rel=\"stylesheet\">\n    </head>\n    <body>\\\n\n        "               local function chaves()                 return "samu function"             end          \n\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  samuel_h = {"samuel_h"} \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. samuel_h[1] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. variavel["nsei"] \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  if samuel_h[2] == "samuel_h" then  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto\"             "  else  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             \"texto do caso não\"             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "             "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. chaves()  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "         "  end\n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "        "  print("samuel") \n PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE_STRING_OF_CONTENT_BY_FILE .. "    \n    </body>\n</html>\n" 
+----------------
+[string "  PRIVATE_STRING_OF_CONTENT_BY_FILE = PRIVATE..."]:1: unexpected symbol near '\'

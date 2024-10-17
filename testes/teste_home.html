@@ -5,26 +5,26 @@
         <title></title>
         <link href="css/style.css" rel="stylesheet">
     </head>
-    <body>\
+    <body>\A
 
         {%
             local function chaves()
                 return "samu function"
             end
-        }
+        }A
 
-        {%samuel_h = {"samuel_h"}}
-        {samuel_h[1]}
-        {variavel["nsei"]}
-        {{if samuel_h[2] == "samuel_h" then}
+        {%samuel_h = {"samuel_h"}}A
+        {samuel_h[1]}A
+        {variavel["nsei"]}A
+        {{if samuel_h[2] ~= "samuel_h" then}C
             "texto"
-            {%else}
-            "texto do caso não"
-            {!chaves()}
-            {chaves()}
-        }
+            {%else}B
+            "texto do caso não"A
+            {!chaves()}A
+            {chaves()}A
+        }D
 
-        {%print("samuel")}
+        {%print("samuel")}A
     
     </body>
 </html>
