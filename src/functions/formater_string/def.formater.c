@@ -2,6 +2,7 @@
 //silver_chain_scope_start
 //mannaged by silver chain
 #include "../../imports/imports.dec.h"
+#include <stdio.h>
 //silver_chain_scope_end
 
 bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, char **result) {
@@ -141,6 +142,9 @@ bool private_verifyr_raw_code_call(LuaCEmbed *l, char **str, char **result) {
         if (*(*str + count_lines) == '\0') {
             return false;
         }
+        if(*(*str + count_lines) == '\n'){
+            *(*str + count_lines) = ' ';
+        }
         if (*(*str + count_lines) == PERCENT_CARACTER) {
             start_call = true;
             start_function_call = count_lines + 1;
@@ -220,6 +224,15 @@ char *private_str_append(char *dest, const char *format, ...) {
     return dest;
 }
 
+void private_add_line_breack(char **str, char **result_str, bool started_string){
+
+    if(started_string){
+        *result_str = private_str_append(*result_str, "\\n");
+    }
+
+    (*str)++;
+}
+
 char *private_process_block(LuaCEmbed *l, char *str) {
 
     char *result_str = NULL;
@@ -241,7 +254,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
 
     while (*str != '\0') {
         if(*str == '\n'){
-            str++;
+            private_add_line_breack(&str, &result_str, started_a_string);
             continue;
         }
         if(*str == '\"'){
@@ -256,6 +269,11 @@ char *private_process_block(LuaCEmbed *l, char *str) {
                 continue;
             }
             //*str = ' ';
+        }
+        if(*str == '\\'){
+            result_str = private_str_append(result_str, "\\\\");
+            str++;
+            continue;
         }
         if (*str == PHRASES_CARACTER && !inside_braces) {
             if (inside_quotes && *str == quote_type) {
@@ -337,6 +355,8 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
     }
 
     char *result_str = private_process_block(args, str);
+
+    printf("\n---------------\n%s\n----------------\n", result_str);
 
     lua.evaluate(args, " %s ", result_str);
 
