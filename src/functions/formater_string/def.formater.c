@@ -87,7 +87,7 @@ bool private_verifyr_function_call(LuaCEmbed *l, char **str, char **result) {
         if (*(*str + count_lines) == '\0') {
             return false;
         }
-        if (*(*str + count_lines) == EXCLAMATION_CARACTER) {
+        if (*(*str + count_lines) == DEFINE_CALL_FUNCTION) {
             start_call = true;
             start_function_call = count_lines + 1;
             if (*(*str + start_function_call) == CLOSE_BRACKETS_CARACTER) {
@@ -144,7 +144,7 @@ bool private_verifyr_raw_code_call(LuaCEmbed *l, char **str, char **result) {
         if(*(*str + count_lines) == '\n'){
             *(*str + count_lines) = ' ';
         }
-        if (*(*str + count_lines) == PERCENT_CARACTER) {
+        if (*(*str + count_lines) == DEFINE_CODE_RAW) {
             start_call = true;
             start_function_call = count_lines + 1;
             if (*(*str + start_function_call) == CLOSE_BRACKETS_CARACTER) {
@@ -247,7 +247,6 @@ char *private_process_block(LuaCEmbed *l, char *str) {
     }
 
     bool inside_quotes = false;
-    char quote_type = '\0';
     bool inside_braces = false;
     const char *start = NULL;
     char valor_buffer[200];
@@ -278,16 +277,23 @@ char *private_process_block(LuaCEmbed *l, char *str) {
             //*str = ' ';
         }
         if(*str == '\\'){
+            if(*str == INIT_IGNORE || *str == CLOSE_IGNORE){
+                str++;
+                continue;
+            }
             result_str = private_str_append(result_str, "\\\\");
             str++;
             continue;
         }
-        if (*str == PHRASES_CARACTER && !inside_braces) {
-            if (inside_quotes && *str == quote_type) {
-                inside_quotes = false;
-            } else if (!inside_quotes) {
-                inside_quotes = true;
-                quote_type = *str;
+        if ((*str == INIT_IGNORE || *str == CLOSE_IGNORE) && !inside_braces) {
+            if (*(str - 1) != '\\'){
+                if (*str == CLOSE_IGNORE) {
+                    inside_quotes = false;
+                } else if (*str == INIT_IGNORE) {
+                    inside_quotes = true;
+                }
+                str++;
+                continue;
             }
 
             if(!started_a_string){
@@ -365,8 +371,6 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
     }
 
     char *result_str = private_process_block(args, str);
-
-    printf("\n---------------\n%s\n----------------\n", result_str);
 
     lua.evaluate(args, " %s ", result_str);
 
