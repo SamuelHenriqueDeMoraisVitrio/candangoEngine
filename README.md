@@ -1,4 +1,3 @@
-
 # Candango Engine Documentation
 
 ## Overview
@@ -6,6 +5,7 @@
 Candango Engine is a lightweight Lua-based engine that allows you to generate dynamic HTML content by embedding Lua commands directly into HTML files. With this engine, you can leverage Lua's logic and functions to create flexible and dynamic web pages.
 
 ### Key Features:
+
 - **Lua-powered HTML templating**: Embed Lua variables, functions, and control structures inside HTML.
 - **Dynamic rendering**: Render HTML content dynamically by combining static HTML with Lua-based logic.
 - **Conditional and loop handling**: Use Lua's control structures for loops and conditionals directly within your templates.
@@ -13,6 +13,7 @@ Candango Engine is a lightweight Lua-based engine that allows you to generate dy
 ---
 
 ## Table of Contents
+
 1. [Setup](#setup)
 2. [Basic Usage](#basic-usage)
 3. [Template Syntax](#template-syntax)
@@ -59,13 +60,14 @@ end
 ## Basic Usage
 
 ### Step 1: Create a Lua file (`main.lua`)
+
 In your Lua script, load the engine, call your template, and specify the desired output.
 
 ```lua
 candango = require("candangoEngine.candango_engine")
 
 -- Example of setting up variables or functions to use in the HTML template
-local variables = {
+variables = {
     name = "Samuel",
     age = 25
 }
@@ -83,6 +85,7 @@ end
 ```
 
 ### Step 2: Create an HTML template (`home.html`)
+
 Embed Lua logic inside your HTML structure using the syntax provided by the engine.
 
 ```html
@@ -111,6 +114,7 @@ Embed Lua logic inside your HTML structure using the syntax provided by the engi
 The Candango Engine provides special markers to embed Lua commands directly inside HTML.
 
 ### **1. Variables:**
+
 Variables can be inserted into your HTML using curly braces `{}`.
 
 ```html
@@ -118,9 +122,11 @@ Variables can be inserted into your HTML using curly braces `{}`.
 ```
 
 ### **2. Control Structures (if/else, loops):**
+
 Use double curly braces `{{}}` to start a control structure, such as an `if` condition or loop, and `{%}` for other Lua expressions.
 
 #### Conditional:
+
 ```html
 {{if condition then}
     <p>This will render if the condition is true.</p>
@@ -130,6 +136,7 @@ Use double curly braces `{{}}` to start a control structure, such as an `if` con
 ```
 
 #### Loop:
+
 ```html
 <ul>
     {{for i = 1, 5 do}
@@ -139,6 +146,7 @@ Use double curly braces `{{}}` to start a control structure, such as an `if` con
 ```
 
 ### **3. Raw Commands:**
+
 Raw Lua commands can be executed within the HTML using `{%}`.
 
 ```html
@@ -146,6 +154,7 @@ Raw Lua commands can be executed within the HTML using `{%}`.
 ```
 
 ### **4. Functions:**
+
 Functions can be embedded using `{!}`. This allows you to concatenate function results directly into the HTML.
 
 ```html
@@ -225,18 +234,21 @@ Invoke Lua functions and embed their output using `{!}`.
 This example renders a simple HTML page where variables are populated from Lua.
 
 **Lua:**
+
 ```lua
 candango = require("candangoEngine.candango_engine")
 variables = { name = "Samuel", city = "Brasília" }
 ```
 
 **HTML Template:**
+
 ```html
 <h1>Hello, {variables["name"]}</h1>
 <p>City: {variables["city"]}</p>
 ```
 
 **Output:**
+
 ```html
 <h1>Hello, Samuel</h1>
 <p>City: Brasília</p>
@@ -247,6 +259,7 @@ variables = { name = "Samuel", city = "Brasília" }
 ### Conditional Statements
 
 **HTML Template:**
+
 ```html
 {{if variables["age"] >= 18 then}
     <p>Welcome, you are an adult.</p>
@@ -256,11 +269,13 @@ variables = { name = "Samuel", city = "Brasília" }
 ```
 
 **Output (if `age >= 18`):**
+
 ```html
 <p>Welcome, you are an adult.</p>
 ```
 
 **Output (if `age < 18`):**
+
 ```html
 <p>Sorry, you are not old enough.</p>
 ```
@@ -270,6 +285,7 @@ variables = { name = "Samuel", city = "Brasília" }
 ### Loops
 
 **HTML Template:**
+
 ```html
 <ul>
     {{for i = 1, 3 do}
@@ -279,6 +295,7 @@ variables = { name = "Samuel", city = "Brasília" }
 ```
 
 **Output:**
+
 ```html
 <ul>
     <li>Item 1</li>
@@ -292,6 +309,7 @@ variables = { name = "Samuel", city = "Brasília" }
 ### Functions
 
 **Lua Function:**
+
 ```lua
 function getMessage()
     return "This is a dynamic message."
@@ -299,22 +317,34 @@ end
 ```
 
 **HTML Template:**
+
 ```html
 <p>{!getMessage()}</p>
 ```
 
 **Output:**
+
 ```html
 <p>This is a dynamic message.</p>
 ```
 
 ---
 
+### Raw text
+
+Your can write a text with noting formatation. Exemplo:
+
+**Text Template
+```lua
+
+```
+
 ## Error Handling
 
 When rendering a template, the engine provides error handling mechanisms. If an error occurs, the engine returns an error message which can be displayed or logged.
 
 **Lua Example:**
+
 ```lua
 local text_formated = candango.Render_text(candango.Get_text_by_file_content("template.html"))
 
@@ -337,4 +367,3 @@ end
 
 - **Keep templates clean**: Avoid overcomplicating templates with too much logic. Keep the logic in Lua and use the templates for rendering.
 - **Use global variables with caution**: Remember that only global variables declared in Lua will be accessible in the templates. Local variables inside `{%}` blocks will not be available outside the block.
-

@@ -8,6 +8,8 @@ function slasla()
   return "Meu nome é samuel Henrique."
 end
 
+global_default = ""
+
 variavel = {}
 
 variavel.nsei = "samuel"

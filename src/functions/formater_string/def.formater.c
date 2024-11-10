@@ -2,6 +2,7 @@
 //silver_chain_scope_start
 //mannaged by silver chain
 #include "../../imports/imports.dec.h"
+#include <stdio.h>
 //silver_chain_scope_end
 
 bool private_verifyr_second_open_bracket_recurslivy(LuaCEmbed *l, char **str, char **result) {
@@ -289,15 +290,16 @@ char *private_process_block(LuaCEmbed *l, char *str) {
             if (*(str - 1) != '\\'){
                 if (*str == CLOSE_IGNORE) {
                     inside_quotes = false;
-                } else if (*str == INIT_IGNORE) {
+                } else{
                     inside_quotes = true;
                 }
+                printf("\n%s\n", str);
                 str++;
                 continue;
             }
 
             if(!started_a_string){
-                result_str = private_str_append(result_str, " %s = %s .. \"%c", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, *str);
+                result_str = private_str_append(result_str, " %s = %s .. \"%c", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, (*str == INIT_IGNORE && INIT_IGNORE == '\xB4')?'\x4':*str);
                 started_a_string = true;
             }else{
                 result_str = private_str_append(result_str, "%c", *str);
@@ -350,6 +352,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
         started_a_string = false;
     }
 
+    printf("\n\tResul:\n%s\n\n", result_str);
     return result_str;
 }
 
