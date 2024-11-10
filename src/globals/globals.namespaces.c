@@ -6,3 +6,4 @@
 
 
 LuaCEmbedNamespace lua;
+LuaCEmbedTable *globals_caracters;

@@ -354,6 +354,8 @@ char *private_process_block(LuaCEmbed *l, char *str) {
 }
 
 LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
+
+    set_globals();
     
     char *str = lua.args.get_str(args, 0);
 

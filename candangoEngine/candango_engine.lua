@@ -1,4 +1,13 @@
 
+---@class Set_globals
+---@field set_globals_caracter string
+---@field define_code_raw string
+---@field close_ignore string
+---@field init_ignore string
+---@field define_call_function string
+---@field open_brackets string
+---@field close_brackets string
+
 ---@class Response_render
 ---@field exist_error boolean
 ---@field error_message string|nil
@@ -25,5 +34,8 @@ local load_lua = package.loadlib(lib_path, "candango_engine_start_point")
 
 ---@type CandangoEngine
 local lib = load_lua()
+
+---@type Set_globals
+set_globals_caracter = set_globals_caracter
 
 return lib

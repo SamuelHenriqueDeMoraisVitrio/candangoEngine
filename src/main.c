@@ -9,6 +9,8 @@ int candango_engine_start_point(lua_State *state) {
   lua = newLuaCEmbedNamespace();
   LuaCEmbed *l = lua.newLuaLib(state);
 
+  create_table_globais(l);
+
   private_callbacks(l);
   
   return lua.perform(l);

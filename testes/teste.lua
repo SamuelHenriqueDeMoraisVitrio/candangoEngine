@@ -2,6 +2,8 @@
 
 candango = require("candangoEngine.candango_engine")
 
+set_globals_caracter.close_ignore = "*"
+
 function slasla()
   return "Meu nome é samuel Henrique."
 end

@@ -7,3 +7,6 @@
 
 void set_globals();
 
+void create_table_globais(LuaCEmbed *l);
+
+
