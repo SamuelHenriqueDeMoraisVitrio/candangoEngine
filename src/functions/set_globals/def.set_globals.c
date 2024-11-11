@@ -17,9 +17,9 @@ void set_globals(){
 
 void create_table_globais(LuaCEmbed *l){
   globals_caracters = lua.globals.new_table(l, "set_globals_caracter");
-  lua.tables.set_string_prop(globals_caracters, "define_code_raw", "%");
+  lua.tables.set_string_prop(globals_caracters, "define_code_raw", "%%");
   lua.tables.set_string_prop(globals_caracters, "close_ignore", "`");
-  lua.tables.set_string_prop(globals_caracters, "init_ignore", "\xB4");
+  lua.tables.set_string_prop(globals_caracters, "init_ignore", "#");
   lua.tables.set_string_prop(globals_caracters, "define_call_function", "!");
   lua.tables.set_string_prop(globals_caracters, "open_brackets", "{");
   lua.tables.set_string_prop(globals_caracters, "close_brackets", "}");

@@ -278,33 +278,33 @@ char *private_process_block(LuaCEmbed *l, char *str) {
             //*str = ' ';
         }
         if(*str == '\\'){
-            if(*str == INIT_IGNORE || *str == CLOSE_IGNORE){
+            if(*(str + 1) == INIT_IGNORE){
                 str++;
                 continue;
             }
-            result_str = private_str_append(result_str, "\\\\");
-            str++;
-            continue;
         }
-        if ((*str == INIT_IGNORE || *str == CLOSE_IGNORE) && !inside_braces) {
+        if (*str == INIT_IGNORE && !inside_braces) {
+
             if (*(str - 1) != '\\'){
-                if (*str == CLOSE_IGNORE) {
+                if (*(str + 1) == '/') {
                     inside_quotes = false;
+                    str++;
                 } else{
                     inside_quotes = true;
                 }
-                printf("\n%s\n", str);
                 str++;
                 continue;
             }
 
             if(!started_a_string){
-                result_str = private_str_append(result_str, " %s = %s .. \"%c", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, (*str == INIT_IGNORE && INIT_IGNORE == '\xB4')?'\x4':*str);
+                result_str = private_str_append(result_str, " %s = %s .. \"%c", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, *str);
                 started_a_string = true;
             }else{
                 result_str = private_str_append(result_str, "%c", *str);
             }
-        } else if (*str == OPEN_BRACKETS_CARACTER && !inside_quotes) {
+            str++;
+            continue;
+        }else if (*str == OPEN_BRACKETS_CARACTER && !inside_quotes) {
             if(started_a_string){
                 result_str = private_str_append(result_str, "\" ");
                 started_a_string = false;
@@ -322,7 +322,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
                 }
             }
             open_brackets_by_text_no_formating = false;
-        } else if (*str == CLOSE_BRACKETS_CARACTER && inside_braces) {
+        }else if (*str == CLOSE_BRACKETS_CARACTER && inside_braces) {
             inside_braces = false;
 
             const char *p = start;
@@ -333,7 +333,7 @@ char *private_process_block(LuaCEmbed *l, char *str) {
 
             result_str = private_str_append(result_str, " %s = %s .. %s ", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, valor_buffer);
             private_init_str_append(&result_str, &started_a_string);
-        } else {
+        } else{
             if (!inside_braces) {
                 if(!started_a_string){
                     result_str = private_str_append(result_str, " %s = %s .. \"%c", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, *str);
@@ -343,8 +343,18 @@ char *private_process_block(LuaCEmbed *l, char *str) {
                 }
             }
         }
-
+        if(*str == '\\'){
+            if(!started_a_string){
+                result_str = private_str_append(result_str, " %s = %s .. \"%s", VARABLE_GLOBAL_TEXT_BY_LUA, VARABLE_GLOBAL_TEXT_BY_LUA, "\\\\");
+                started_a_string = true;
+            }else{
+                result_str = private_str_append(result_str, "%s", "\\\\");
+            }
             str++;
+            continue;
+        }
+
+        str++;
     }
 
     if(started_a_string){
@@ -352,7 +362,6 @@ char *private_process_block(LuaCEmbed *l, char *str) {
         started_a_string = false;
     }
 
-    printf("\n\tResul:\n%s\n\n", result_str);
     return result_str;
 }
 

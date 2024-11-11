@@ -1,17 +1,153 @@
-{global_default}
-{{if global_default then}
-    Hello
-}
+#
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conteúdos de Matemática ENEM 2024</title>
+  <style>
+    /* CSS básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      color: #0056b3;
+      margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: 15px;
+    }
+    .topic {
+      background-color: #e9ecef;
+      border-left: 5px solid #007bff;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .chart-container {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 15px;
+    }
+  </style>
 </head>
 <body>
-    <p>My name is ´{Josh Free}` -> Name</p>
 
-    <p>loop in c: "for(condition)´{ code }`"</p>
+<div class="container">
+  <h1>Conteúdos de Matemática ENEM 2024</h1>
+  <p>Veja os principais tópicos de matemática que apareceram no ENEM 2024, com explicações intuitivas e gráficos interativos para facilitar o aprendizado.</p>
+
+  <!-- Tópico: Estatística -->
+  <div class="topic">
+    <h2>Estatística e Probabilidade</h2>
+    <p>A Estatística é essencial para interpretar dados e entender fenômenos. No ENEM, questões sobre média, mediana, moda, desvio padrão e probabilidades são comuns.</p>
+    <h3>Gráfico de Distribuição de Probabilidades</h3>
+    <canvas id="chartEstatistica" class="chart-container"></canvas>
+  </div>
+
+  <!-- Tópico: Geometria -->
+  <div class="topic">
+    <h2>Geometria e Trigonometria</h2>
+    <p>Questões sobre áreas, perímetros, volume e trigonometria são recorrentes no ENEM. É fundamental entender as relações entre ângulos e as fórmulas para resolver problemas geométricos.</p>
+    <h3>Exemplo Interativo: Triângulo Retângulo</h3>
+    <canvas id="triangleCanvas" class="chart-container"></canvas>
+  </div>
+
+  <!-- Tópico: Funções -->
+  <div class="topic">
+    <h2>Funções e Gráficos</h2>
+    <p>Funções são frequentemente exploradas no ENEM, desde as mais simples até exponenciais e logarítmicas. Saber identificar o tipo de função e seu comportamento é essencial.</p>
+    <h3>Gráfico Interativo de Funções</h3>
+    <canvas id="chartFuncoes" class="chart-container"></canvas>
+  </div>
+
+  <!-- Tópico: Progressões -->
+  <div class="topic">
+    <h2>Progressões Aritméticas e Geométricas</h2>
+    <p>Progressões Aritméticas (P.A.) e Geométricas (P.G.) são temas clássicos. Entender as fórmulas para o termo geral e a soma dos termos ajuda a resolver as questões rapidamente.</p>
+  </div>
+
+</div>
+
+<!-- JavaScript para Gráficos e Interações -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Gráfico de Distribuição de Probabilidades - Estatística
+  const ctxEstatistica = document.getElementById('chartEstatistica').getContext('2d');
+  const chartEstatistica = new Chart(ctxEstatistica, {
+    type: 'bar',
+    data: {
+      labels: ['1', '2', '3', '4', '5', '6'],
+      datasets: [{
+        label: 'Distribuição de Probabilidades (Dado)',
+        data: [16.67, 16.67, 16.67, 16.67, 16.67, 16.67],
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+
+  // Gráfico de Funções
+  const ctxFuncoes = document.getElementById('chartFuncoes').getContext('2d');
+  const chartFuncoes = new Chart(ctxFuncoes, {
+    type: 'line',
+    data: {
+      labels: Array.from({ length: 21 }, (_, i) => i - 10),
+      datasets: [{
+        label: 'Função Quadrática y = x^2',
+        data: Array.from({ length: 21 }, (_, i) => (i - 10) ** 2),
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        x: { beginAtZero: true },
+        y: { beginAtZero: true }
+      }
+    }
+  });
+
+  // Triângulo Retângulo - Geometria (Canvas)
+  const triangleCanvas = document.getElementById('triangleCanvas');
+  const ctxTriangle = triangleCanvas.getContext('2d');
+  function drawTriangle() {
+    ctxTriangle.clearRect(0, 0, triangleCanvas.width, triangleCanvas.height);
+    ctxTriangle.beginPath();
+    ctxTriangle.moveTo(50, 50);
+    ctxTriangle.lineTo(50, 350);
+    ctxTriangle.lineTo(350, 350);
+    ctxTriangle.closePath();
+    ctxTriangle.fillStyle = 'rgba(255, 99, 132, 0.5)';
+    ctxTriangle.fill();
+    ctxTriangle.stroke();
+  }
+  drawTriangle();
+</script>
+
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 candango = require("candangoEngine.candango_engine")
 
-set_globals_caracter.close_ignore = "*"
+data_do_dia_de_entrega = "28/04/2026"
 
 function slasla()
   return "Meu nome é samuel Henrique."
