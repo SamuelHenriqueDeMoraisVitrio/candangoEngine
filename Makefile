@@ -9,8 +9,9 @@ RUN_CMD=./${OUT_TESTE}
 EXEC_LUA=lua
 RUN_LUA=testes/teste.lua
 CONCAT_LUA=${EXEC_LUA} ${RUN_LUA}
+ZIP_NAME=candangoEngine.zip
 
-all: clear comp run
+all: clear comp run zip
 
 testC: clear comp_teste run_teste
 
@@ -49,3 +50,8 @@ clear:
 	@echo ""
 	@ls -lah --color=always
 	@echo ""
+
+zip:
+	rm -f ${ZIP_NAME}
+	zip -r ${ZIP_NAME} candangoEngine/
+
