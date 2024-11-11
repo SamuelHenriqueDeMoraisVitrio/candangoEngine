@@ -332,10 +332,21 @@ end
 
 ### Raw text
 
-Your can write a text with noting formatation. Exemplo:
+You can write text without lua formatting. Example:
 
-**Text Template
-```lua
+**Text Template**
+
+```text
+
+My text can be formatted using variables inside curly braces, for example: #{I put the variable in here and I can comment by opening it with '\#' and closing it with '\#/'}#/
+
+```
+
+**Output**
+
+```text
+
+My text can be formatted using variables inside curly braces, for example: {I put the variable in here and I can comment by opening it with '#' and closing it with '#/'}
 
 ```
 

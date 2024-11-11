@@ -4,6 +4,8 @@ candango = require("candangoEngine.candango_engine")
 
 data_do_dia_de_entrega = "28/04/2026"
 
+link = "https://cdn.jsdelivr.net/npm/chart.js"
+
 function slasla()
   return "Meu nome é samuel Henrique."
 end
