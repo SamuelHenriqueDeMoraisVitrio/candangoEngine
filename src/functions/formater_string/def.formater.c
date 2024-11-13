@@ -368,6 +368,10 @@ char *private_process_block(LuaCEmbed *l, char *str) {
 LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
 
     set_globals();
+
+    if(lua.args.get_type(args, 0) != 4){ // iqual the string
+        return NULL;
+    }
     
     char *str = lua.args.get_str(args, 0);
 
@@ -375,31 +379,39 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
         return NULL;
     }
 
-    lua.evaluate(args, "%s = \"\"", VARABLE_GLOBAL_TEXT_BY_LUA);
+    LuaCEmbed *machine_virtual_extension = lua.newLuaLib(args->state);
+
+    lua.evaluate(machine_virtual_extension, "%s = \"\"", VARABLE_GLOBAL_TEXT_BY_LUA);
 
     char *response;
 
     if (!str) {
-        response = lua.globals.get_string(args, VARABLE_GLOBAL_TEXT_BY_LUA);
+        response = lua.globals.get_string(machine_virtual_extension, VARABLE_GLOBAL_TEXT_BY_LUA);
+        lua.free(machine_virtual_extension);
         return lua.response.send_str(response);
     }
 
-    char *result_str = private_process_block(args, str);
+    char *result_str = private_process_block(machine_virtual_extension, str);
 
-    lua.evaluate(args, " %s ", result_str);
+    lua.evaluate(machine_virtual_extension, " %s ", result_str);
 
     free(result_str);
     
     LuaCEmbedTable *table_response = lua.tables.new_anonymous_table(args);
 
-    if (lua.has_errors(args)) {
+    if (lua.has_errors(machine_virtual_extension)) {
         lua.tables.set_bool_prop(table_response, "exist_error", true);
-        lua.tables.set_string_prop(table_response, "error_message", lua.get_error_message(args));
+        lua.tables.set_string_prop(table_response, "error_message", lua.get_error_message(machine_virtual_extension));
+        lua.tables.set_string_prop(table_response, "render_text", "");
+        lua.free(machine_virtual_extension);
         return lua.response.send_table(table_response);
     }
 
     lua.tables.set_bool_prop(table_response, "exist_error", false);
     lua.tables.set_string_prop(table_response, "render_text", lua.globals.get_string(args, VARABLE_GLOBAL_TEXT_BY_LUA));
+    lua.tables.set_string_prop(table_response, "error_message", "");
+
+    lua.free(machine_virtual_extension);
 
     return lua.response.send_table(table_response);
 }
