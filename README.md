@@ -371,6 +371,16 @@ end
 ## Advanced Features
 
 - **Custom Commands**: You can extend the template engine to support additional commands and logic. Refer to the source code for further customization options.
+- **Custom keys**: You can configure the keys used as you prefer, for example:
+```lua
+
+set_globals_caracter.init_ignore = "#"
+set_globals_caracter.open_brackets = "{"
+set_globals_caracter.close_brackets = "}"
+set_globals_caracter.define_code_raw = "%"
+set_globals_caracter.define_call_function = "!"
+
+```
 
 ---
 
@@ -380,8 +390,6 @@ end
 - **Use global variables with caution**: Remember that only global variables declared in Lua will be accessible in the templates. Local variables inside `{%}` blocks will not be available outside the block.
 
 # LuaCEmbed
-
----
 
 MIT License
 

@@ -6,6 +6,12 @@ data_do_dia_de_entrega = "28/04/2026"
 
 link = "https://cdn.jsdelivr.net/npm/chart.js"
 
+set_globals_caracter.init_ignore = "#"
+set_globals_caracter.open_brackets = "{"
+set_globals_caracter.close_brackets = "}"
+set_globals_caracter.define_code_raw = "%"
+set_globals_caracter.define_call_function = "!"
+
 function slasla()
   return "Meu nome é samuel Henrique."
 end

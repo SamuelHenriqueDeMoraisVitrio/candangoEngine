@@ -1,8 +1,6 @@
 
 ---@class Set_globals
----@field set_globals_caracter string
 ---@field define_code_raw string
----@field close_ignore string
 ---@field init_ignore string
 ---@field define_call_function string
 ---@field open_brackets string
