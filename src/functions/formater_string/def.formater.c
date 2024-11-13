@@ -387,7 +387,7 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
 
     if (!str) {
         response = lua.globals.get_string(machine_virtual_extension, VARABLE_GLOBAL_TEXT_BY_LUA);
-        lua.free(machine_virtual_extension);
+        //lua.free(machine_virtual_extension);
         return lua.response.send_str(response);
     }
 
@@ -403,7 +403,7 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
         lua.tables.set_bool_prop(table_response, "exist_error", true);
         lua.tables.set_string_prop(table_response, "error_message", lua.get_error_message(machine_virtual_extension));
         lua.tables.set_string_prop(table_response, "render_text", "");
-        lua.free(machine_virtual_extension);
+        //lua.free(machine_virtual_extension);
         return lua.response.send_table(table_response);
     }
 
@@ -411,7 +411,7 @@ LuaCEmbedResponse *private_render_text_by_lua(LuaCEmbed *args){
     lua.tables.set_string_prop(table_response, "render_text", lua.globals.get_string(args, VARABLE_GLOBAL_TEXT_BY_LUA));
     lua.tables.set_string_prop(table_response, "error_message", "");
 
-    lua.free(machine_virtual_extension);
+    //lua.free(machine_virtual_extension);
 
     return lua.response.send_table(table_response);
 }
