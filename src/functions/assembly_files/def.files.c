@@ -1,20 +1,14 @@
 
 //silver_chain_scope_start
 //mannaged by silver chain
-#include "../imports/imports.dep.h"
+#include "../../imports/imports.dec.h"
 //silver_chain_scope_end
 
 
 
-#define PRIVATE_FILE_TYPE 1
-#define PRIVATE_FOLDER_TYPE 2
-#define PRIVATE_NOT_FOUND -1
 
-unsigned char *private_get_any_content(const char * path,long *size,bool *is_binary);
 
-char *private_get_string_in_file_content(const char * path);
 
-int private_file_type(const char *path);
 
 char *private_get_string_in_file_content(const char * path){
     long size;
