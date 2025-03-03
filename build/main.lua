@@ -11,14 +11,14 @@ function main()
       description="Describes all building sectors."
     },
     {
-      arg="silver",
-      func=Initialize_silver,
-      description="Implements the necessary imports for 'include' and 'auto complete'."
-    },
-    {
       arg="dependencies",
       func=Install_dependencies,
       description="Installs the necessary external dependencies."
+    },
+    {
+      arg="silver",
+      func=Initialize_silver,
+      description="Implements the necessary imports for 'include' and 'auto complete'."
     },
     --{
       --arg="document",
