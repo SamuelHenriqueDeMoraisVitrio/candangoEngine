@@ -22,15 +22,15 @@ char *Candango_read_text_by_chunck(const char *path_file){
 
   long size_text_chunk;
   while((size_text_chunk = fread(chunck, sizeof(char), CANDANGO_INITIAL_SIZE_READ - 1, text_by_file)) > 0){
-
-    if((args->size_buffer - args->size_buffer_current) < size_text_chunk){
-      printf("aq");
-    }
+    Candango_Realloc_Buffer(args, size_text_chunk);
 
     Candango_render_by_chunk(args, chunck, false);
   }
 
   fclose(text_by_file);
+
+  const char *Candango_NULO = "\0";
+  Candango_adicionar_ao_buffer(args, Candango_NULO, strlen(Candango_NULO));
 
   return args->strings->text_normal;
 }

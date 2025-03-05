@@ -5,10 +5,6 @@
 //silver_chain_scope_end
 
 
-
-void Candango_adicionar_ao_buffer(Candango_args_render *self, const char *text, size_t len);
-
-
-
+void Candango_Realloc_Buffer(Candango_args_render *args, size_t size_text_chunk);
 
 

@@ -22,9 +22,21 @@ void Candango_render_by_chunk(Candango_args_render *args, char *chunk, bool is_r
     };
     const char *primary_key = Candango_find_primary_key(chunk, keys, &args->key_started);
     if(primary_key == NULL){
-      Candango_adicionar_ao_buffer(args, chunk);
+      Candango_adicionar_ao_buffer(args, chunk, strlen(chunk));
+      return;
+    }
+
+    size_t primary_block_concatened = primary_key - chunk;
+    Candango_adicionar_ao_buffer(args, chunk, primary_block_concatened);
+
+    if(args->key_started > CANDANGO_FUNCTION){
+      index = primary_block_concatened + 1;
+    }
+    if(args->key_started > CANDANGO_NOTHING){
+      index = primary_block_concatened + 2;
     }
   }
+
 
 }
 

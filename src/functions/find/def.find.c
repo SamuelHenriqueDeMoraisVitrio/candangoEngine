@@ -13,7 +13,7 @@ const char *Candango_find_primary_key(const char *chunk, const char **keys, shor
     const char *pos = strstr(chunk, keys[i]);
     if (pos && (!menor || pos < menor)) {
       if(key_started){
-        *key_started = i;
+        *key_started = i + 1;
       }
       menor = pos;
     }
