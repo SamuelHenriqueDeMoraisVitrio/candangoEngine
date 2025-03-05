@@ -12,4 +12,7 @@
 #include <stdbool.h>
 #include <sys/stat.h>
 #include <ctype.h>
+#include <stddef.h>
+#include <stdint.h>
+
 

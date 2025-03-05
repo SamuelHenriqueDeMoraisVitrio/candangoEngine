@@ -5,8 +5,9 @@
 //silver_chain_scope_end
 
 
-void set_globals();
 
-void create_table_globais(LuaCEmbed *l);
+
+void Candango_render_by_chunk(Candango_args_render *args, char *chunk, bool is_recursive);
+
 
 
