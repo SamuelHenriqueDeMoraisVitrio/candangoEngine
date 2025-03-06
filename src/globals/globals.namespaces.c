@@ -6,5 +6,5 @@
 
 
 
-LuaCEmbedNamespace lua;
-LuaCEmbedTable *globals_caracters;
+LuaCEmbedNamespace Candango_lua;
+LuaCEmbedTable *Candango_globals_caracters;

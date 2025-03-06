@@ -6,15 +6,15 @@
 
 
 
-int candango_engine_start_point(lua_State *state) {
+int luaopen_CandangoEngine_start_point(lua_State *state) {
 
-  lua = newLuaCEmbedNamespace();
-  LuaCEmbed *l = lua.newLuaLib(state);
+  Candango_lua = newLuaCEmbedNamespace();
+  LuaCEmbed *l = Candango_lua.newLuaLib(state);
 
-  create_table_globais(l);
+  //create_table_globais(l);
 
   private_callbacks(l);
-  
-  return lua.perform(l);
+
+  return Candango_lua.perform(l);
 }
 

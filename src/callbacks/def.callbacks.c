@@ -6,7 +6,7 @@
 
 void private_callbacks(LuaCEmbed *l){
 
-  lua.add_callback(l, LUA_GET_TEXT_BY_FILE_CONTENT, get_string_in_file_content);
-  //lua.add_callback(l, LUA_RENDER_TEXT, private_render_text_by_lua);
+  Candango_lua.add_callback(l, CANDANGO_LUA_GET_TEXT_BY_FILE_CONTENT, get_string_in_file_content);
+  Candango_lua.add_callback(l, CANDANGO_LUA_RENDER_TEXT_BY_PATH, Candango_render_text_by_path);
 
 }

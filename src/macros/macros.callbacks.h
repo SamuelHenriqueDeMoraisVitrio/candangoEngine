@@ -6,8 +6,8 @@
 
 
 
-#define LUA_GET_TEXT_BY_FILE_CONTENT "Get_text_by_file_content"
-#define LUA_RENDER_TEXT "Render_text"
+#define CANDANGO_LUA_GET_TEXT_BY_FILE_CONTENT "Get_text_by_file_content"
+#define CANDANGO_LUA_RENDER_TEXT_BY_PATH "render_text_by_path"
 
 
 
