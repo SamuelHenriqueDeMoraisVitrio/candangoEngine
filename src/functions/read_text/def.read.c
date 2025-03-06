@@ -32,6 +32,7 @@ char *Candango_read_text_by_chunck(const char *path_file){
   const char *Candango_NULO = "\0";
   Candango_adicionar_ao_buffer(args, Candango_NULO, strlen(Candango_NULO));
 
+  //printf("\n\n\n\tText lua\n%s\n\n\n", args->strings->text_to_work);
   return args->strings->text_normal;
 }
 
