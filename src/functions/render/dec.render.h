@@ -7,7 +7,7 @@
 
 
 
-void Candango_render_by_chunk(Candango_args_render *args, char *chunk, bool is_recursive);
+void Candango_render_by_chunk(Candango_args_render *args, const char *chunk, long long size_chunk);
 
 
 

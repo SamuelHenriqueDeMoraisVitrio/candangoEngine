@@ -31,7 +31,6 @@ void Candango_adicionar_ao_buffer_lua(Candango_args_render *self, const char *te
 
   memcpy(self->strings->text_to_work + self->size_buffer_lua_current, text, len);
   self->size_buffer_lua_current += len;
-  printf("\n%s\n", self->strings->text_to_work);
 }
 
 void Candango_reset_buffer_lua(Candango_args_render *self){
@@ -42,6 +41,8 @@ void Candango_reset_buffer_lua(Candango_args_render *self){
     printf("Internal error: When expanding end buffer");
     exit(1);
   }
+  self->size_buffer_lua_current = 0;
+  self->size_buffer_lua = CANDANGO_INITIAL_SIZE_BUFFER_LUA;
 }
 
 

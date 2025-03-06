@@ -7,6 +7,8 @@
 
 
 
-void Candango_ignore_text(Candango_args_render *self, const char *chunk, size_t index, long long size_chunk);
+
+
+void Candango_raw_text(Candango_args_render *self, const char *chunk, size_t index, long long size_chunk);
 
 
