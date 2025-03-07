@@ -14,7 +14,8 @@ char *Candango_render_by_chunk(Candango_args_render *args, const char *chunk, lo
   size_t index = 0;
 
   if(args->key_started == CANDANGO_NOTHING){
-    const char *primary_key = Candango_find_primary_key(chunk, keys, &args->key_started, size_chunk);
+    int size_key;//O tamanho da chave especifica para ser ignorada no texto final
+    const char *primary_key = Candango_find_primary_key(chunk, &args->key_started, size_chunk, &size_key);
     if(!primary_key){
       Candango_adicionar_ao_buffer(args, chunk, size_chunk);
       return NULL;
@@ -23,16 +24,15 @@ char *Candango_render_by_chunk(Candango_args_render *args, const char *chunk, lo
     size_t primary_block_concatened = primary_key - chunk;
     Candango_adicionar_ao_buffer(args, chunk, primary_block_concatened);//Adiciona o bloco antes da abertura da chave
 
-    if(args->key_started > CANDANGO_FUNCTION){
-      index = primary_block_concatened + 1;
-    }
-    if(args->key_started > CANDANGO_NOTHING){
-      index = primary_block_concatened + 2;
-    }
+    index = primary_block_concatened + size_key;
   }
 
   if(args->key_started == CANDANGO_IGNORE){
     return Candango_ignore_text(args, chunk, index, size_chunk, machine);
+  }
+  
+  if(args->key_started == CANDANGO_RAW_CONTEXT){
+    return Candango_raw_text(args, chunk, index, size_chunk, machine);
   }
 
   return NULL;

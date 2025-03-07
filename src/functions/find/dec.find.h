@@ -5,5 +5,5 @@
 //silver_chain_scope_end
 
 
-const char *Candango_find_primary_key(const char *chunk, const char **keys, short *key_started, long long size_chunk);
+const char *Candango_find_primary_key(const char *chunk, short *key_started, long long size_chunk, int *size_key);
 

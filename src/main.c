@@ -11,7 +11,7 @@ int luaopen_CandangoEngine_start_point(lua_State *state) {
   Candango_lua = newLuaCEmbedNamespace();
   LuaCEmbed *l = Candango_lua.newLuaLib(state);
 
-  //create_table_globais(l);
+  create_table_globais(l);
 
   private_callbacks(l);
 

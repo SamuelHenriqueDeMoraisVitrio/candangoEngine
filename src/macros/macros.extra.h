@@ -8,5 +8,7 @@
 
 
 #define Candango_NULO "\0"
+#define CANDANGO_INIT_PROP "init"
+#define CANDANGO_END_PROP "end"
 
 
