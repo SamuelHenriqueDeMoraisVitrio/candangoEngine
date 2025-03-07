@@ -42,9 +42,11 @@ void Candango_free_string_separator(Candango_string_separator *self){
     if(self->text_to_work){
       free(self->text_to_work);
     }
+    /*
     if(self->text_normal){
       free(self->text_normal);
     }
+    */
     free(self);
   }
 }

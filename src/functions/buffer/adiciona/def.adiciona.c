@@ -14,7 +14,7 @@ void Candango_adicionar_ao_buffer(Candango_args_render *self, const char *text, 
 }
 
 void Candango_adicionar_ao_buffer_lua(Candango_args_render *self, const char *text, size_t len){
-  while ((self->size_buffer_lua - self->size_buffer_lua_current) < (len + 1)) {
+  while ((self->size_buffer_lua - self->size_buffer_lua_current) < (len + 2)) {
     if(self->size_buffer_lua < CANDANGO_LIMIT_EXPONENTIAL_SIZE_BUFFER_LUA){
       self->size_buffer_lua *= CANDANGO_EXPONECIAL_SIZE;
     }else{

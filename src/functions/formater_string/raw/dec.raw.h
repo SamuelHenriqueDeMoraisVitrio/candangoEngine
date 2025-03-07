@@ -9,6 +9,6 @@
 
 
 
-void Candango_raw_text(Candango_args_render *self, const char *chunk, size_t index, long long size_chunk);
+char *Candango_raw_text(Candango_args_render *self, const char *chunk, size_t index, long long size_chunk, LuaCEmbed *machine);
 
 

@@ -3,7 +3,3 @@
 //mannaged by silver chain
 #include "../../imports/imports.globals.h"
 //silver_chain_scope_end
-
-
-char *Candango_read_text_by_chunck(const char *path_file, LuaCEmbed *machine,  bool *is_error);
-

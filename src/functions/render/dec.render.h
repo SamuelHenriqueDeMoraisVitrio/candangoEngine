@@ -7,7 +7,7 @@
 
 
 
-void Candango_render_by_chunk(Candango_args_render *args, const char *chunk, long long size_chunk);
+char *Candango_render_by_chunk(Candango_args_render *args, const char *chunk, long long size_chunk, LuaCEmbed *machine);
 
 
 

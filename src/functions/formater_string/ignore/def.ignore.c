@@ -7,14 +7,14 @@
 
 
 
-void Candango_ignore_text(Candango_args_render *self, const char *chunk, size_t index, long long size_chunk){
+char *Candango_ignore_text(Candango_args_render *self, const char *chunk, size_t index, long long size_chunk, LuaCEmbed *machine){
 
   const char *text_working = chunk + index;//Posição da primeira chave para frente, text: 'é {nome}' chave: '{' posição: 'nome'('n')
 
   const char *finded_end_key = strstr(text_working, CANDANGO_KEY_END_IGNORE);
   if(!finded_end_key || finded_end_key >= text_working + (size_chunk - index)){
     Candango_adicionar_ao_buffer_lua(self, text_working, size_chunk - index);//Adiciona todo chunk a partir do text_working
-    return;
+    return NULL;
   }
 
   size_t block_finished_cod_lua = finded_end_key - text_working;
@@ -25,8 +25,9 @@ void Candango_ignore_text(Candango_args_render *self, const char *chunk, size_t 
   const char *init_block_last_end_key = finded_end_key + strlen(CANDANGO_KEY_END_IGNORE);
   long long size_new_chunk = (chunk + size_chunk) - init_block_last_end_key;
   if(finded_end_key > 0){
-    Candango_render_by_chunk(self, init_block_last_end_key, size_new_chunk);
+    Candango_render_by_chunk(self, init_block_last_end_key, size_new_chunk, machine);
   }
+  return NULL;
 }
 
 

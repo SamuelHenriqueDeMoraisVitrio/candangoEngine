@@ -20,7 +20,7 @@ LuaCEmbedResponse *Candango_render_text_by_path(LuaCEmbed *args){
   }
 
   bool in_error = false;
-  const char *text = Candango_read_text_by_chunck(str, &in_error);
+  const char *text = Candango_read_text_by_chunck(str, args, &in_error);
 
   LuaCEmbedTable *response = Candango_lua.tables.new_anonymous_table(args);
   Candango_lua.tables.set_string_prop(response, "response", in_error?NULL:text);
