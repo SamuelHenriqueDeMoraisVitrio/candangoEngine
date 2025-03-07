@@ -39,10 +39,7 @@ void Candango_render_by_chunk(Candango_args_render *args, const char *chunk, lon
 
   if(args->key_started == CANDANGO_IGNORE){
     Candango_ignore_text(args, chunk, index, size_chunk);
-  }
-
-  if(args->key_started == CANDANGO_RAW_CONTEXT){
-
+    return;
   }
 
 }

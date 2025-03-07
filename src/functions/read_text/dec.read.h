@@ -5,5 +5,5 @@
 //silver_chain_scope_end
 
 
-char *Candango_read_text_by_chunck(const char *path_file);
+char *Candango_read_text_by_chunck(const char *path_file, bool *is_error);
 

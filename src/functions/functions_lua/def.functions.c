@@ -19,14 +19,15 @@ LuaCEmbedResponse *Candango_render_text_by_path(LuaCEmbed *args){
     exit(1);
   }
 
-  long teste = Candango_lua.get_evaluation_long(args, "teste");
+  bool in_error = false;
+  const char *text = Candango_read_text_by_chunck(str, &in_error);
 
-  if (Candango_lua.has_errors(args)) {
-    printf("Error candango: %s", Candango_lua.get_error_message(args));
-    exit(1);
-  }
+  LuaCEmbedTable *response = Candango_lua.tables.new_anonymous_table(args);
+  Candango_lua.tables.set_string_prop(response, "response", in_error?NULL:text);
+  Candango_lua.tables.set_string_prop(response, "error_message", in_error?text:NULL);
+  Candango_lua.tables.set_bool_prop(response, "in_error", in_error);
 
-  return Candango_lua.response.send_long(teste);
+  return Candango_lua.response.send_table(response);
 }
 
 

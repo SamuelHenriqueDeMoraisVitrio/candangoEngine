@@ -6,12 +6,12 @@
 
 
 
-char *Candango_read_text_by_chunck(const char *path_file){
+char *Candango_read_text_by_chunck(const char *path_file, bool *is_error){
 
   FILE *text_by_file = fopen(path_file, "r");
   if(!text_by_file){
-    printf("Intern error: Open file recused");
-    return NULL;
+    *is_error = true;
+    return "Intern error: Open file recused";
   }
 
   char chunck[CANDANGO_INITIAL_SIZE_READ];
@@ -34,11 +34,16 @@ char *Candango_read_text_by_chunck(const char *path_file){
   const char *Candango_NULO = "\0";
 
   if(args->key_started != CANDANGO_NOTHING){
+    printf("\n\t%d\n", args->key_started);
     short Candango_size_max = 190;
-    char Candango_message[Candango_size_max + 1]; 
+    char *Candango_message = malloc(Candango_size_max + 1); 
+    if(!Candango_message){
+      printf("Internal error: allocate Candango_message with key_started != 0");
+      exit(1);
+    }
     snprintf(Candango_message, Candango_size_max, "Error:. There was no correct handling of the keys in the section:\n%s%s\n", args->strings->text_to_work, Candango_NULO);
-    printf("%s", Candango_message);
-    return NULL;
+    *is_error = true;
+    return Candango_message;
   }
 
   Candango_adicionar_ao_buffer(args, Candango_NULO, strlen(Candango_NULO));

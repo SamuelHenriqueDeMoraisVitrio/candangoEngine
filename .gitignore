@@ -9,6 +9,7 @@ to_text.txt
 small_text.txt
 teste.lua
 CandangoEngine.lua
+result_io_text.txt
 #build/
 darwintypes.lua
 #src/
