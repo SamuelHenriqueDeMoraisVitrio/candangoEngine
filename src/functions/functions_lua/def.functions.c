@@ -19,11 +19,15 @@ LuaCEmbedResponse *Candango_render_text_by_path(LuaCEmbed *args){
     exit(1);
   }
 
+  Candango_set_keys();
+
+  LuaCEmbed *machine_virtual_extension = Candango_lua.newLuaLib(args->state);
+
   bool in_error = false;
-  const char *text = Candango_read_text_by_chunck(str, args, &in_error);
+  const char *text = Candango_read_text_by_chunck(str, machine_virtual_extension, &in_error);
 
   LuaCEmbedTable *response = Candango_lua.tables.new_anonymous_table(args);
-  Candango_lua.tables.set_string_prop(response, "response", in_error?NULL:text);
+  Candango_lua.tables.set_string_prop(response, "text", in_error?NULL:text);
   Candango_lua.tables.set_string_prop(response, "error_message", in_error?text:NULL);
   Candango_lua.tables.set_bool_prop(response, "in_error", in_error);
 

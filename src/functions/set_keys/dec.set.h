@@ -11,11 +11,11 @@ void create_table_key(LuaCEmbed *l, const char *name_table, const char *init, co
 
 void create_table_globais(LuaCEmbed *l);
 
-void Candango_set_key_in_global(const char *table_name, char *init_out, char *end_out);
+void Candango_set_key_in_global(const char *table_name, char **init_out, char **end_out);
 
 void Candango_set_keys();
 
-const char **Candango_get_init_keys();
+void Candango_update_init_keys();
 
 
 

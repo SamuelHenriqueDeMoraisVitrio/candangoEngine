@@ -20,5 +20,5 @@ char *CANDANGO_KEY_END_FUNCTION;
 char *CANDANGO_KEY_INIT_VARIABLE;
 char *CANDANGO_KEY_END_VARIABLE;
 
-const char **Candango_keys_init[CANDANGO_SIZE_INIT_KEYS];
+const char *Candango_keys_init[CANDANGO_SIZE_INIT_KEYS];
 

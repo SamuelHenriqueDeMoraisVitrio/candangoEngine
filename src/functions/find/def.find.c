@@ -9,14 +9,12 @@
 const char *Candango_find_primary_key(const char *chunk, short *key_started, long long size_chunk, int *size_key){
   const char *menor = NULL;
 
-  const char **keys = Candango_get_init_keys();
-
   const char *ignore_positions = chunk + size_chunk;
   for (short i = 0; i < CANDANGO_SIZE_INIT_KEYS; i++) {
-    const char *pos = strstr(chunk, keys[i]);
+    const char *pos = strstr(chunk, Candango_keys_init[i]);
     if (pos && (!menor || pos < menor) && pos < ignore_positions){//O ponteiro deve existir && prioridade de key é o primeiro que aparece && posição deve estar fora do lixo da chunk
       if(key_started){
-        *size_key = strlen(keys[i]);
+        *size_key = strlen(Candango_keys_init[i]);
         *key_started = i + 1;
       }
       menor = pos;

@@ -25,6 +25,7 @@ char *Candango_render_by_chunk(Candango_args_render *args, const char *chunk, lo
     Candango_adicionar_ao_buffer(args, chunk, primary_block_concatened);//Adiciona o bloco antes da abertura da chave
 
     index = primary_block_concatened + size_key;
+
   }
 
   if(args->key_started == CANDANGO_IGNORE){
@@ -35,7 +36,7 @@ char *Candango_render_by_chunk(Candango_args_render *args, const char *chunk, lo
     return Candango_raw_text(args, chunk, index, size_chunk, machine);
   }
 
-  return NULL;
+  return "Internal error: 'Key started' not expected.";
 }
 
 
