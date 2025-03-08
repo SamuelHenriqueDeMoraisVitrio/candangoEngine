@@ -36,6 +36,10 @@ char *Candango_render_by_chunk(Candango_args_render *args, const char *chunk, lo
     return Candango_raw_text(args, chunk, index, size_chunk, machine);
   }
 
+  if(args->key_started == CANDANGO_FUNCTION){
+    return Candango_function_text(args, chunk, index, size_chunk, machine);
+  }
+
   return "Internal error: 'Key started' not expected.";
 }
 

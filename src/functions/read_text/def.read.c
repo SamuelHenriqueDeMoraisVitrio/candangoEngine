@@ -46,9 +46,9 @@ char *Candango_read_text_by_chunck(const char *path_file, LuaCEmbed *machine, bo
     }
     const char *message_main = error_message?error_message:"There was no correct handling of the keys in the section:";
     if(args->size_buffer_lua_current > 50){
-      snprintf(Candango_message, Candango_size_max, "Error:. %s %s\n%.30s ... %s;\n%s\n", message_main, args->key_started > CANDANGO_NOTHING?Candango_keys_init[args->key_started - 1]:"", args->strings->text_to_work, args->strings->text_to_work + (args->size_buffer_lua_current - 30), Candango_NULO);
+      snprintf(Candango_message, Candango_size_max, "Error:. %s %s\n%.30s ... %s;%s", message_main, args->key_started > CANDANGO_NOTHING?Candango_keys_init[args->key_started - 1]:"", args->strings->text_to_work, args->strings->text_to_work + (args->size_buffer_lua_current - 30), Candango_NULO);
     }else{
-      snprintf(Candango_message, Candango_size_max, "Error:. %s %s\n%s ...\n%s\n", message_main, args->key_started > CANDANGO_NOTHING?Candango_keys_init[args->key_started - 1]:"", args->strings->text_to_work, Candango_NULO);
+      snprintf(Candango_message, Candango_size_max, "Error:. %s %s\n%s%s", message_main, args->key_started > CANDANGO_NOTHING?Candango_keys_init[args->key_started - 1]:"", args->strings->text_to_work, Candango_NULO);
     }
     *is_error = true;
 

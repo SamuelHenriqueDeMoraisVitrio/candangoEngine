@@ -25,7 +25,10 @@ char *Candango_ignore_text(Candango_args_render *self, const char *chunk, size_t
   const char *init_block_last_end_key = finded_end_key + strlen(CANDANGO_KEY_END_IGNORE);
   long long size_new_chunk = (chunk + size_chunk) - init_block_last_end_key;
   if(finded_end_key > 0){
-    Candango_render_by_chunk(self, init_block_last_end_key, size_new_chunk, machine);
+    char *response = Candango_render_by_chunk(self, init_block_last_end_key, size_new_chunk, machine);
+    if(response){
+      return response;
+    }
   }
   return NULL;
 }
