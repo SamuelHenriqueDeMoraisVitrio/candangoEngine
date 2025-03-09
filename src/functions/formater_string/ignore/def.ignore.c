@@ -12,9 +12,31 @@ char *Candango_ignore_text(Candango_args_render *self, const char *chunk, size_t
   const char *text_working = chunk + index;//Posição da primeira chave para frente, text: 'é {nome}' chave: '{' posição: 'nome'('n')
 
   const char *finded_end_key = strstr(text_working, CANDANGO_KEY_END_IGNORE);
-  if(!finded_end_key || finded_end_key >= text_working + (size_chunk - index)){
-    Candango_adicionar_ao_buffer_lua(self, text_working, size_chunk - index);//Adiciona todo chunk a partir do text_working
-    return NULL;
+  int size_end_key = strlen(CANDANGO_KEY_END_IGNORE);
+  int Candango_size_init_key_ignore = strlen(CANDANGO_KEY_INIT_PASS_KEY);
+  int Candango_size_end_key_ignore = strlen(CANDANGO_KEY_END_PASS_KEY);
+
+  bool condition = finded_end_key >= text_working + (size_chunk - index);
+
+  if(!condition){
+    if((finded_end_key - Candango_size_init_key_ignore) >= text_working && finded_end_key){
+      if(strncmp(CANDANGO_KEY_INIT_PASS_KEY, finded_end_key - Candango_size_init_key_ignore, Candango_size_init_key_ignore) == 0){
+        if(strncmp(CANDANGO_KEY_END_PASS_KEY, finded_end_key + size_end_key, Candango_size_end_key_ignore) == 0){
+          Candango_adicionar_ao_buffer_lua(self, text_working, (finded_end_key - Candango_size_init_key_ignore) - text_working);
+          Candango_adicionar_ao_buffer_lua(self, finded_end_key, size_end_key);
+          const char *render_rest = finded_end_key + size_end_key + Candango_size_end_key_ignore;
+          if(strlen(render_rest) < size_chunk - index){
+            return Candango_render_by_chunk(self, render_rest, size_chunk - index, machine);
+          }
+          return NULL;
+        }
+      }
+    }
+    
+    if(!finded_end_key){
+      Candango_adicionar_ao_buffer_lua(self, text_working, size_chunk - index);//Adiciona todo chunk a partir do text_working
+      return NULL;
+    }
   }
 
   size_t block_finished_cod_lua = finded_end_key - text_working;
@@ -22,7 +44,7 @@ char *Candango_ignore_text(Candango_args_render *self, const char *chunk, size_t
   Candango_adicionar_ao_buffer(self, self->strings->text_to_work, self->size_buffer_lua_current);
   Candango_reset_buffer_lua(self);
   self->key_started = CANDANGO_NOTHING;
-  const char *init_block_last_end_key = finded_end_key + strlen(CANDANGO_KEY_END_IGNORE);
+  const char *init_block_last_end_key = finded_end_key + size_end_key;
   long long size_new_chunk = (chunk + size_chunk) - init_block_last_end_key;
   if(finded_end_key > 0){
     char *response = Candango_render_by_chunk(self, init_block_last_end_key, size_new_chunk, machine);
