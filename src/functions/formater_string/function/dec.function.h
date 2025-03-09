@@ -7,8 +7,6 @@
 
 
 
-char *Candango_function_text(Candango_args_render *self, const char *chunk, size_t index, long long size_chunk, LuaCEmbed *machine);
-
 char *Candango_function_text_formatter(Candango_args_render *self, const char *text_working, size_t block_finished_cod_lua, LuaCEmbed *machine);
 
 
