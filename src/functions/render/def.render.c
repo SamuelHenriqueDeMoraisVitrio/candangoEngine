@@ -29,15 +29,15 @@ char *Candango_render_by_chunk(Candango_args_render *args, const char *chunk, lo
   }
 
   if(args->key_started == CANDANGO_IGNORE){
-    return Candango_ignore_text(args, chunk, index, size_chunk, machine);
+    return Candango_formater_text_default(args, chunk, index, size_chunk, machine, CANDANGO_KEY_INIT_IGNORE, CANDANGO_KEY_END_IGNORE, Candango_ignore_text_formatter);
   }
   
   if(args->key_started == CANDANGO_RAW_CONTEXT){
-    return Candango_raw_text(args, chunk, index, size_chunk, machine);
+    return Candango_formater_text_default(args, chunk, index, size_chunk, machine, CANDANGO_KEY_INIT_RAW_CONTEXT, CANDANGO_KEY_END_RAW_CONTEXT, Candango_raw_text_formatter);
   }
 
   if(args->key_started == CANDANGO_FUNCTION){
-    return Candango_function_text(args, chunk, index, size_chunk, machine);
+    return Candango_formater_text_default(args, chunk, index, size_chunk, machine, CANDANGO_KEY_INIT_FUNCTION, CANDANGO_KEY_END_FUNCTION, Candango_function_text_formatter);
   }
 
   return "Internal error: 'Key started' not expected.";
