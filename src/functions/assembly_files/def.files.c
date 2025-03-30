@@ -49,6 +49,7 @@ unsigned char *private_get_any_content(const char * path,long *size,bool *is_bin
 
     *size = ftell(file);
 
+
     if(*size == -1){
         fclose(file);
         return NULL;
