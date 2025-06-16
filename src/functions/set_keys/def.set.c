@@ -1,9 +1,36 @@
 
 //silver_chain_scope_start
-//mannaged by silver chain
+//mannaged by silver chain: https://github.com/OUIsolutions/SilverChain
 #include "../../imports/imports.dec.h"
 //silver_chain_scope_end
 
+/*
+ * Here are functions to create a global table where you can configure 
+ * the keys used in the text, such as '{' for 'ze'. Or leave the defaults below.
+
+//Values keys
+#define CANDANGO_DEFAULT_KEY_INIT_IGNORE  "$#"
+#define CANDANGO_DEFAULT_KEY_END_IGNORE  "#$"
+
+#define CANDANGO_DEFAULT_KEY_INIT_RAW_CONTEXT  "#{"
+#define CANDANGO_DEFAULT_KEY_END_RAW_CONTEXT  "}"
+
+#define CANDANGO_DEFAULT_KEY_INIT_FUNCTION  "!{"
+#define CANDANGO_DEFAULT_KEY_END_FUNCTION "}"
+
+#define CANDANGO_DEFAULT_KEY_INIT_VARIABLE "{"
+#define CANDANGO_DEFAULT_KEY_END_VARIABLE "}"
+
+//names_keys
+#define CANDANGO_TABLE_SET_KEYS "keys"
+#define CANDANGO_IGNORE_PROP "ignore"
+#define CANDANGO_RAW_PROP "raw"
+#define CANDANGO_FUNCTION_PROP "function"
+#define CANDANGO_VARIABLE_PROP "variable"
+
+#define CANDANGO_INIT_PROP "init"
+#define CANDANGO_END_PROP "end"
+*/
 
 void create_table_key(LuaCEmbed *l, const char *name_table, const char *init, const char *end){
   LuaCEmbedTable *Candango_key = Candango_lua.tables.new_anonymous_table(l);

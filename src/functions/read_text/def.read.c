@@ -1,6 +1,6 @@
 
 //silver_chain_scope_start
-//mannaged by silver chain
+//mannaged by silver chain: https://github.com/OUIsolutions/SilverChain
 #include "../../imports/imports.dec.h"
 //silver_chain_scope_end
 
@@ -24,7 +24,7 @@ char *Candango_read_text_by_chunck(const char *path_file, LuaCEmbed *machine, bo
   unsigned long size_lines = 0;
   long long size_text_chunk;
   Candango_reset_buffer_lua(args);
-  while((size_text_chunk = fread(chunck, sizeof(char), CANDANGO_INITIAL_SIZE_READ - 2, text_by_file)) > 0){//-2: 1 para o terminador nulo e 1 para o santo
+  while((size_text_chunk = fread(chunck, sizeof(char), CANDANGO_INITIAL_SIZE_READ - 2, text_by_file)) > 0){//-2: 1 para o terminador nulo e outro para o santo
     if(error_message){
       break;
     }

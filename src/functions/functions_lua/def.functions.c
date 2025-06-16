@@ -1,15 +1,25 @@
 
 //silver_chain_scope_start
-//mannaged by silver chain
+//mannaged by silver chain: https://github.com/OUIsolutions/SilverChain
 #include "../../imports/imports.dec.h"
 //silver_chain_scope_end
 
 
+/*
+  * Function that performs the entire rendering 
+  * process but saves it in a specific path.
+*/
 LuaCEmbedResponse *Candango_render_text_by_path_and_save(LuaCEmbed *args){
 
   return NULL;
 }
 
+/*
+  * Function that receives a file 
+  * path and from there it renders 
+  * the text and returns the rendered 
+  * text.
+*/
 LuaCEmbedResponse *Candango_render_text_by_path(LuaCEmbed *args){
 
   char *str = Candango_lua.args.get_str(args, 0);
