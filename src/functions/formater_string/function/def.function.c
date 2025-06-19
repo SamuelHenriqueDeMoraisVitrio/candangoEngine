@@ -10,7 +10,7 @@
 
 char *Candango_function_text_formatter(Candango_args_render *self, const char *text_working, size_t block_finished_cod_lua, LuaCEmbed *machine){
   Candango_adicionar_ao_buffer_lua(self, text_working, block_finished_cod_lua);
-  const char *result_evaluet = Candango_lua.get_string_evaluation(machine, self->strings->text_to_work);
+  const char *result_evaluet = Candango_lua.get_string_evaluation(machine, "tostring((function()\n%s\nend)())", self->strings->text_to_work);
   if(Candango_lua.has_errors(machine)){
     return Candango_lua.get_error_message(machine);
   }

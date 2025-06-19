@@ -67,6 +67,7 @@ char *Candango_render_by_chunk(Candango_args_render *args, const char *chunk, lo
     );
   }
 
+
   if(args->key_started == CANDANGO_VARIABLE){
     return Candango_formater_text_default(
       args,
@@ -79,6 +80,7 @@ char *Candango_render_by_chunk(Candango_args_render *args, const char *chunk, lo
       Candango_variable_text_formatter
     );
   }
+
 
   return "Internal error: 'Key started' not expected.";
 }

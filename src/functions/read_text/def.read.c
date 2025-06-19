@@ -45,6 +45,17 @@ char *Candango_read_text_by_chunck(const char *path_file, LuaCEmbed *machine, bo
       exit(1);
     }
     const char *message_main = error_message?error_message:"There was no correct handling of the keys in the section:";
+
+    /* DEBUGG
+    printf("DEBUG:\n");
+    printf("message_main: %s\n", message_main);
+    printf("args->key_started: %d\n", args->key_started);
+    printf("args->strings->text_to_work: %s\n", args->strings->text_to_work);
+    printf("args->size_buffer_lua_current: %zu\n", args->size_buffer_lua_current);
+    printf("Candango_keys_init[args->key_started - 1]: %s\n", 
+          args->key_started > CANDANGO_NOTHING ? Candango_keys_init[args->key_started - 1] : "(null)");
+    //*/
+
     if(args->size_buffer_lua_current > 50){
       snprintf(Candango_message, Candango_size_max, "Error:. %s %s\n%.30s ... %s;%s", message_main, args->key_started > CANDANGO_NOTHING?Candango_keys_init[args->key_started - 1]:"", args->strings->text_to_work, args->strings->text_to_work + (args->size_buffer_lua_current - 30), Candango_NULO);
     }else{
