@@ -11,7 +11,17 @@ char *Candango_read_text_by_chunck(const char *path_file, LuaCEmbed *machine, bo
   FILE *text_by_file = fopen(path_file, "r");
   if(!text_by_file){
     *is_error = true;
-    return "Intern error: Open file recused";
+    /*
+     * Eu preciso do retorno em heap!
+    */
+    const char *msg = "Intern error: Open file recused";
+    char *heap_msg = malloc(strlen(msg) + 1);
+    if (heap_msg){
+      printf("\n\tError internal, malloc;\n");
+      exit(1);
+    }
+    strcpy(heap_msg, msg);
+    return heap_msg;
   }
 
   char chunck[CANDANGO_INITIAL_SIZE_READ];
@@ -63,7 +73,7 @@ char *Candango_read_text_by_chunck(const char *path_file, LuaCEmbed *machine, bo
     }
     *is_error = true;
 
-    free(args->strings->text_normal);
+    //free(args->strings->text_normal);
     Candango_free_args_render(args);
     
     return Candango_message;
@@ -71,7 +81,7 @@ char *Candango_read_text_by_chunck(const char *path_file, LuaCEmbed *machine, bo
 
   Candango_adicionar_ao_buffer(args, Candango_NULO, strlen(Candango_NULO));
 
-  char *response = args->strings->text_normal;
+  char *response = strdup(args->strings->text_normal);
   Candango_free_args_render(args);
   return response;
 }
