@@ -15,7 +15,7 @@ LuaCEmbedResponse *get_string_in_file_content(LuaCEmbed *args){
     return  Candango_lua.response.send_error(error_msg);
   }
 
-  return Candango_lua.response.send_str(private_get_string_in_file_content(request_args));
+  return Candango_lua.response.send_str(private_candango_get_string_in_file_content(request_args));
 }
 
 

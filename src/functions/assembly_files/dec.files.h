@@ -6,10 +6,10 @@
 
 
 
-unsigned char *private_get_any_content(const char * path,long *size,bool *is_binary);
+unsigned char *private_candango_get_any_content(const char * path,long *size,bool *is_binary);
 
-char *private_get_string_in_file_content(const char * path);
+char *private_candango_get_string_in_file_content(const char * path);
 
-int private_file_type(const char *path);
+int private_candango_file_type(const char *path);
 
 

@@ -10,10 +10,10 @@
 
 
 
-char *private_get_string_in_file_content(const char * path){
+char *private_candango_get_string_in_file_content(const char * path){
     long size;
     bool is_binary;
-    unsigned char *element = private_get_any_content(path,&size,&is_binary);
+    unsigned char *element = private_candango_get_any_content(path,&size,&is_binary);
     if(element == NULL){
         return NULL;
     }
@@ -25,12 +25,12 @@ char *private_get_string_in_file_content(const char * path){
     return (char*)element;
 }
 
-unsigned char *private_get_any_content(const char * path,long *size,bool *is_binary){
+unsigned char *private_candango_get_any_content(const char * path,long *size,bool *is_binary){
 
     *is_binary = false;
     *size = 0;
 
-    int entity = private_file_type(path);
+    int entity = private_candango_file_type(path);
     if(entity != PRIVATE_FILE_TYPE){
         return NULL;
     }
@@ -88,7 +88,7 @@ unsigned char *private_get_any_content(const char * path,long *size,bool *is_bin
     return content;
 }
 
-int private_file_type(const char *path){
+int private_candango_file_type(const char *path){
     //returns 1 for file, 2 for directory, -1 for not found
     struct stat path_stat;
 

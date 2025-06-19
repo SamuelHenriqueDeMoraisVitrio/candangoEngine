@@ -19,7 +19,7 @@
 #define CANDANGO_DEFAULT_KEY_END_VARIABLE "}"
 
 //names_keys
-#define CANDANGO_TABLE_SET_KEYS "keys"
+#define CANDANGO_TABLE_SET_KEYS "Keys"
 #define CANDANGO_IGNORE_PROP "ignore"
 #define CANDANGO_RAW_PROP "raw"
 #define CANDANGO_FUNCTION_PROP "function"
