@@ -40,6 +40,9 @@ function main()
       --func=Update_types,
       --description="Update types in realeses."
     --}
+    {
+
+    }
   }
 
   Get_args()
