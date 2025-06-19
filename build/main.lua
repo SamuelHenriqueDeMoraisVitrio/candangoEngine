@@ -34,14 +34,16 @@ function main()
       arg="comp",
       func=Comp,
       description="'src/main.c' is compiled to realeses."
-    }--,
+    },
     --{
       --arg="types",
       --func=Update_types,
       --description="Update types in realeses."
-    --}
+    --},
     {
-
+      arg="camalgamation",
+      func=Camalga,
+      description="Camalgamation to use for amalgamar .c"
     }
   }
 
