@@ -6,6 +6,10 @@ This engine allows developers to dynamically insert Lua logic and variables into
 
 ---
 
+![Logo do Projeto](assets/imgs/logo_hard.jpeg)
+
+---
+
 ## 🚀 Features
 
 * **Variable Interpolation** using `{}`
