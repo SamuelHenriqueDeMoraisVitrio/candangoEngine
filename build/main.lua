@@ -35,11 +35,11 @@ function main()
       func=Comp,
       description="'src/main.c' is compiled to realeses."
     },
-    --{
-      --arg="types",
-      --func=Update_types,
-      --description="Update types in realeses."
-    --},
+    {
+      arg="types",
+      func=Update_types,
+      description="Update types in realeses."
+    },
     {
       arg="camalgamation",
       func=Camalga,
