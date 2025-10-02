@@ -23,11 +23,10 @@ end
 
 function Comp()
   local path_types = "realeses/" .. Name_lib .. '/' .. Name_lib .. ".lua"
-  local raw_types_temp = darwin.dtw.load_file(path_types)
   Preparation("gcc", "main.c", "-shared -fpic", "realeses/CandangoEngine", "CandangoEngine.so")
-  if raw_types_temp then
-    darwin.dtw.write_file(path_types, raw_types_temp)
-  end
+  
+  darwin.dtw.write_file(path_types, darwin.dtw.load_file("assets/CandangoEngine.lua"))
+  
 
   darwin.dtw.remove_any("realeses/" .. Name_lib .. ".zip")
   os.execute("zip -r realeses/" .. Name_lib .. ".zip realeses/" .. Name_lib)
