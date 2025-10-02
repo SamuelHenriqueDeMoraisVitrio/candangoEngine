@@ -6,6 +6,7 @@ test
 realeses
 big_text.txt
 1MB_text.txt
+.vscode
 small_text.txt
 teste.lua
 result_io_text.txt
