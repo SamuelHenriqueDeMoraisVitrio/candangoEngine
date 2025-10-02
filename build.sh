@@ -4,5 +4,4 @@ curl -L https://github.com/OUIsolutions/Darwin/releases/download/0.3.0/darwin.ou
 ./darwin drop_types
 mv darwintypes.lua build
 
-./darwin run_blueprint -mode folder build help
-
+./darwin run_blueprint -mode folder build
