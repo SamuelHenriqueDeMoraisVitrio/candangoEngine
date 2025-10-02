@@ -11,7 +11,7 @@ function Camalga()
       --print("path:", path)
       --print("-------------")
 
-      if path == "../dependencies/dep.LuaCEmbed.h" then
+      if path == "../dependencies/dep.LuaCEmbed.c" then
         return "dont-include"
       end
 
