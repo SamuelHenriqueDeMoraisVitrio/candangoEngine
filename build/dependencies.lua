@@ -22,8 +22,8 @@ end
 
 local links = {
   {
-    link = "https://github.com/OUIsolutions/LuaCEmbed/releases/download/v0.780/LuaCEmbed.h",
-    out = "dep.LuaCEmbed.h"
+    link = "https://github.com/OUIsolutions/LuaCEmbed/releases/download/0.12.0/LuaCEmbedOne.c",
+    out = "dep.LuaCEmbed.c"
   }
 }
 
