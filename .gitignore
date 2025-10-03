@@ -9,6 +9,7 @@ big_text.txt
 .vscode
 small_text.txt
 teste.lua
+build_til_vibescript.sh
 result_io_text.txt
 teste*
 new_candango_test.sh
