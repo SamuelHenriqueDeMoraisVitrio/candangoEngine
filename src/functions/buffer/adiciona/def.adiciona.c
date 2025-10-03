@@ -9,6 +9,7 @@
 
 
 void Candango_adicionar_ao_buffer(Candango_args_render *self, const char *text, size_t len) {
+  Candango_Realloc_Buffer(self,len);
   memcpy(self->strings->text_normal + self->size_buffer_current, text, len);
   self->size_buffer_current += len;
   self->strings->text_normal[self->size_buffer_current] = '\0';
